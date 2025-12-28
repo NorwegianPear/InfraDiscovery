@@ -1,0 +1,48 @@
+{
+  "$schema": "environments-schema.json",
+  "version": "1.0",
+  "environments": {
+    "_template": {
+      "displayName": "Template Environment",
+      "domain": "ad.company.local",
+      "domainControllers": ["DC01.ad.company.local"],
+      "dnsServers": ["DC01.ad.company.local"],
+      "dhcpServers": [],
+      "hypervisors": [],
+      "nutanixCluster": null,
+      "paloAltoFirewall": null,
+      "netboxUrl": null,
+      "targetWebServer": null,
+      "portalHostname": "infrastructure.company.local",
+      "discoveryOptions": {
+        "deepDiscovery": true,
+        "includeWorkstations": true,
+        "includeServers": true,
+        "includeAD": true,
+        "includeDNS": true,
+        "includeDHCP": true,
+        "includePKI": true,
+        "includeIIS": true,
+        "includeSQL": true,
+        "includeHyperV": true,
+        "includeNutanix": false,
+        "includePaloAlto": false,
+        "includeNetbox": false,
+        "probeServers": true,
+        "collectHardwareInfo": true,
+        "collectServicesInfo": true,
+        "collectDiskInfo": true,
+        "collectNetworkInfo": true
+      },
+      "stencilsPath": null,
+      "notes": "Copy this template to create a new environment"
+    }
+  },
+  "globalSettings": {
+    "defaultCredentialPath": "Credentials",
+    "defaultDataPath": "Environments",
+    "autoRefreshHours": 24,
+    "portalTheme": "modern-dark",
+    "deepDiscoveryDefault": true
+  }
+}

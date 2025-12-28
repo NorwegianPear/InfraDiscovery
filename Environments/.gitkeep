@@ -1,0 +1,11 @@
+# InfraDiscovery - Environments
+# This directory contains per-environment data:
+#
+# Environments/
+# └── [EnvironmentName]/
+#     ├── Data/           # Discovery JSON output files
+#     ├── Reports/        # Generated HTML portals
+#     └── Diagrams/       # Visio diagrams and specifications
+#
+# Each environment is isolated with its own data and reports.
+# Discovery data is saved with timestamps for history.

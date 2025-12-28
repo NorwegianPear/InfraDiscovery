@@ -1,0 +1,26 @@
+# InfraDiscovery
+# Ignore encrypted credential files
+Credentials/*-admin.xml
+
+# Ignore environment data (contains potentially sensitive info)
+Environments/*/Data/*.json
+Environments/*/Reports/*.html
+Environments/*/Diagrams/*.vsdx
+Environments/*/Diagrams/*.json
+
+# Keep directory structure
+!Environments/*/.gitkeep
+!Credentials/.gitkeep
+
+# PowerShell module cache
+*.psm1.cache
+
+# Visual Studio Code
+.vscode/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
