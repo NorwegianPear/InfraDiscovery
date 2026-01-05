@@ -1,6 +1,12 @@
 # InfraDiscovery
 
+[![Atea](https://img.shields.io/badge/Atea-Norge%20AS-00a3e0?style=for-the-badge)](https://www.atea.no)
+[![PowerShell](https://img.shields.io/badge/PowerShell-5.1+-5391FE?style=for-the-badge&logo=powershell&logoColor=white)](https://docs.microsoft.com/powershell/)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20Server-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/windows-server)
+
 A modular PowerShell-based infrastructure discovery, documentation, and portal deployment framework.
+
+> **Created by [Uy Le Phan Thai](mailto:uy.le.phan@atea.no)** | Senior Consultant - Infrastructure | [Atea Norge AS](https://www.atea.no)
 
 ## Features
 
@@ -240,6 +246,22 @@ Set-PaloAltoCredential -Environment "MyCompany"
   └──────────────────────────────────────────────────────────────┘
 ```
 
+## 👤 Author
+
+**Uy Le Phan Thai**  
+Senior Consultant - Infrastructure  
+[Atea Norge AS](https://www.atea.no)
+
+## 👤 Author
+
+**Uy Le Phan Thai**  
+Senior Consultant - Infrastructure  
+[Atea Norge AS](https://www.atea.no)
+
 ## License
 
-MIT License - Use freely for any infrastructure documentation needs.
+MIT License - Use freely for any infrastructure documentation needs.  
+© 2026 Atea Norge AS  
+© 2026 Atea Norge AS
+
+
