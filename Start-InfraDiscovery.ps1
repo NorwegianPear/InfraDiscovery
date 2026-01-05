@@ -47,7 +47,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false)]
-    [ValidateSet('Setup', 'Discover', 'GeneratePortal', 'Deploy', 'Visio', 'Menu', 'ListEnvironments')]
+    [ValidateSet('Setup', 'Discover', 'Network', 'GeneratePortal', 'Deploy', 'Visio', 'Menu', 'ListEnvironments', 'Performance', 'JumboFrames')]
     [string]$Action = 'Menu',
     
     [Parameter(Mandatory = $false)]
@@ -74,8 +74,11 @@ function Import-InfraModules {
     $modules = @(
         "CredentialManager.psm1",
         "InfraDiscovery.psm1",
+        "NetworkDiscovery.psm1",
         "PortalGenerator.psm1",
-        "PortalDeployer.psm1"
+        "PortalDeployer.psm1",
+        "JumboFrameDeployer.psm1",
+        "PerformanceOptimizer.psm1"
     )
     
     foreach ($module in $modules) {
@@ -248,6 +251,53 @@ function Invoke-Discovery {
     Start-InfrastructureDiscovery -Environment $Env
 }
 
+
+function Invoke-NetworkDiscovery {
+    param([string]$Env)
+
+    if (-not $Env) {
+        $Env = Select-Environment
+    }
+
+    if (-not $Env) { return }
+
+    Start-NetworkDiscovery -Environment $Env
+}
+
+function Invoke-PerformanceOptimization {
+    param([string]$Env)
+
+    if (-not $Env) {
+        $Env = Select-Environment
+    }
+
+    if (-not $Env) { return }
+
+    # Check if module function exists
+    if (Get-Command Start-PerformanceOptimization -ErrorAction SilentlyContinue) {
+        Start-PerformanceOptimization -Environment $Env
+    } else {
+        Write-Warning "PerformanceOptimizer module not loaded or function not available."
+    }
+}
+
+function Invoke-JumboFrameDeployment {
+    param([string]$Env)
+
+    if (-not $Env) {
+        $Env = Select-Environment
+    }
+
+    if (-not $Env) { return }
+
+    # Check if module function exists
+    if (Get-Command Deploy-JumboFrames -ErrorAction SilentlyContinue) {
+        Deploy-JumboFrames -Environment $Env
+    } else {
+        Write-Warning "JumboFrameDeployer module not loaded or function not available."
+    }
+}
+
 function Invoke-GeneratePortal {
     param([string]$Env, [switch]$Open)
     
@@ -327,9 +377,10 @@ function Show-MainMenu {
     Write-Host "  ┌──────────────────────────────────────────────────────────────┐" -ForegroundColor DarkGray
     Write-Host "  │  [1] Setup New Environment                                   │" -ForegroundColor White
     Write-Host "  │  [2] Run Infrastructure Discovery                            │" -ForegroundColor White
-    Write-Host "  │  [3] Generate HTML Portal                                    │" -ForegroundColor White
-    Write-Host "  │  [4] Deploy Portal to IIS                                    │" -ForegroundColor White
-    Write-Host "  │  [5] Full Workflow (Discover → Generate → Deploy)            │" -ForegroundColor White
+    Write-Host "  │  [3] Run Network Discovery (Palo Alto, etc.)                 │" -ForegroundColor White
+    Write-Host "  │  [4] Generate HTML Portal                                    │" -ForegroundColor White
+    Write-Host "  │  [5] Deploy Portal to IIS                                    │" -ForegroundColor White
+    Write-Host "  │  [6] Full Workflow (Discover → Generate → Deploy)            │" -ForegroundColor White
     Write-Host "  ├──────────────────────────────────────────────────────────────┤" -ForegroundColor DarkGray
     Write-Host "  │  [C] Manage Credentials                                      │" -ForegroundColor Gray
     Write-Host "  │  [E] Edit Environment Config                                 │" -ForegroundColor Gray
@@ -352,9 +403,10 @@ function Start-InteractiveMenu {
         switch ($choice) {
             '1' { Invoke-Setup }
             '2' { Invoke-Discovery }
-            '3' { Invoke-GeneratePortal -Open }
-            '4' { Invoke-Deploy }
-            '5' {
+            '3' { Invoke-NetworkDiscovery }
+            '4' { Invoke-GeneratePortal -Open }
+            '5' { Invoke-Deploy }
+            '6' {
                 # Full workflow
                 $env = Select-Environment
                 if ($env) {
@@ -473,7 +525,28 @@ switch ($Action) {
             exit 1
         }
         Invoke-Deploy -Env $Environment -Server $TargetServer -Host $Hostname
+    }    'Network' {
+        if (-not $Environment) {
+            Write-Error "Environment parameter required for Network action."
+            exit 1
+        }
+        Invoke-NetworkDiscovery -Env $Environment
     }
+    'Performance' {
+        if (-not $Environment) {
+            Write-Error "Environment parameter required for Performance action."
+            exit 1
+        }
+        Invoke-PerformanceOptimization -Env $Environment
+    }
+    'JumboFrames' {
+        if (-not $Environment) {
+            Write-Error "Environment parameter required for JumboFrames action."
+            exit 1
+        }
+        Invoke-JumboFrameDeployment -Env $Environment
+    }
+    
     'ListEnvironments' {
         $envs = Get-EnvironmentList
         if ($envs.Count -gt 0) {
@@ -489,5 +562,10 @@ switch ($Action) {
     }
 }
 #endregion
+
+
+
+
+
 
 

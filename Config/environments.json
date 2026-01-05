@@ -1,6 +1,6 @@
 {
   "$schema": "environments-schema.json",
-  "version": "1.0",
+  "version": "1.1",
   "environments": {
     "_template": {
       "displayName": "Template Environment",
@@ -9,11 +9,28 @@
       "dnsServers": ["DC01.ad.company.local"],
       "dhcpServers": [],
       "hypervisors": [],
+      "networkDevices": {
+        "paloAlto": {
+          "firewalls": [],
+          "panorama": null
+        },
+        "cisco": {
+          "switches": [],
+          "routers": []
+        },
+        "fortinet": {
+          "firewalls": []
+        }
+      },
       "nutanixCluster": null,
-      "paloAltoFirewall": null,
       "netboxUrl": null,
       "targetWebServer": null,
       "portalHostname": "infrastructure.company.local",
+      "portalDeployment": {
+        "method": "direct",
+        "relayServer": null,
+        "iisPath": "C:\\inetpub\\wwwroot\\InfraPortal"
+      },
       "discoveryOptions": {
         "deepDiscovery": true,
         "includeWorkstations": true,
@@ -26,7 +43,8 @@
         "includeSQL": true,
         "includeHyperV": true,
         "includeNutanix": false,
-        "includePaloAlto": false,
+        "includeNetwork": true,
+        "includePaloAlto": true,
         "includeNetbox": false,
         "probeServers": true,
         "collectHardwareInfo": true,

@@ -6,9 +6,12 @@ A modular PowerShell-based infrastructure discovery, documentation, and portal d
 
 - **Credential Management**: Secure encrypted credential storage per environment
 - **Infrastructure Discovery**: Automated discovery of AD, DNS, DHCP, Servers, Workstations, PKI, IIS
+- **Network Discovery**: Palo Alto firewall discovery (routes, interfaces, zones, VPNs)
 - **HTML Portal Generation**: Beautiful responsive documentation portal with deep analysis
 - **Web Portal Deployment**: Deploy to IIS with scheduled data refresh
 - **Visio Diagram Generation**: Professional diagrams using vendor stencils
+- **Performance Optimization**: Defender exclusions, SMB tuning
+- **Jumbo Frame Deployment**: Phased MTU 9014 deployment with rollback
 - **Multi-Environment Support**: Manage multiple environments from one installation
 
 ## Quick Start
@@ -23,6 +26,7 @@ cd InfraDiscovery
 # 3. Or run specific commands:
 .\Start-InfraDiscovery.ps1 -Action Setup -Environment "MyCompany"
 .\Start-InfraDiscovery.ps1 -Action Discover -Environment "MyCompany"
+.\Start-InfraDiscovery.ps1 -Action Network -Environment "MyCompany"
 .\Start-InfraDiscovery.ps1 -Action GeneratePortal -Environment "MyCompany"
 .\Start-InfraDiscovery.ps1 -Action Deploy -Environment "MyCompany" -TargetServer "WEB01"
 ```
@@ -35,15 +39,18 @@ InfraDiscovery/
 ├── Config/
 │   └── environments.json       # Environment configurations
 ├── Credentials/
-│   └── [Environment]-admin.xml # Encrypted credentials per environment
+│   ├── [Environment]-admin.xml     # AD/Windows credentials (DPAPI encrypted)
+│   └── [Environment]-paloalto.xml  # Palo Alto API credentials
 ├── Modules/
 │   ├── CredentialManager.psm1  # Secure credential handling
-│   ├── InfraDiscovery.psm1     # Discovery functions
+│   ├── InfraDiscovery.psm1     # Windows infrastructure discovery
+│   ├── NetworkDiscovery.psm1   # Network device discovery (Palo Alto)
 │   ├── PortalGenerator.psm1    # HTML portal generation
-│   └── PortalDeployer.psm1     # IIS deployment
+│   ├── PortalDeployer.psm1     # IIS deployment
+│   ├── PerformanceOptimizer.psm1  # Performance tuning
+│   └── JumboFrameDeployer.psm1    # Jumbo Frame deployment
 ├── Templates/
-│   ├── Portal-Template.html    # Base portal template
-│   └── Styles/                 # CSS and assets
+│   └── network-infrastructure.json  # Network template
 ├── Environments/
 │   └── [Environment]/          # Per-environment data
 │       ├── Data/               # Discovery JSON output
@@ -66,39 +73,122 @@ This will prompt for:
 - Domain controller(s)
 - Admin credentials (stored encrypted)
 
-### 2. Run Discovery
+### 2. Configure Network Devices
+
+Edit `Config/environments.json` to add network devices:
+
+```json
+{
+  "environments": {
+    "MyCompany": {
+      "networkDevices": {
+        "paloAlto": {
+          "firewalls": ["10.0.0.1", "10.0.0.2"],
+          "panorama": null
+        }
+      }
+    }
+  }
+}
+```
+
+### 3. Set Palo Alto Credentials
 
 ```powershell
+Import-Module .\Modules\NetworkDiscovery.psm1
+Set-PaloAltoCredential -Environment "MyCompany"
+```
+
+### 4. Run Discovery
+
+```powershell
+# Windows infrastructure discovery
 .\Start-InfraDiscovery.ps1 -Action Discover -Environment "CustomerName"
+
+# Network device discovery (Palo Alto)
+.\Start-InfraDiscovery.ps1 -Action Network -Environment "CustomerName"
 ```
 
-Discovers:
-- Active Directory (forest, domains, sites, OUs, GPOs)
-- DNS zones and records
-- DHCP scopes
-- Servers with roles (DC, DNS, DHCP, File, SQL, IIS, PKI)
-- Workstations
-- Network topology
+## Network Discovery
 
-### 3. Generate Portal
+### Palo Alto Firewall Discovery
+
+Discovers the following from Palo Alto firewalls via REST API:
+
+| Category | Data Collected |
+|----------|----------------|
+| **System Info** | Hostname, Model, Serial, Software Version, Uptime |
+| **Interfaces** | Name, IP, Zone, Status, MAC, Speed |
+| **Routes** | Destination, NextHop, Interface, Metric |
+| **Zones** | Name, Type (Layer2/Layer3), Interfaces |
+| **VPN Tunnels** | Tunnel interfaces and status |
 
 ```powershell
-.\Start-InfraDiscovery.ps1 -Action GeneratePortal -Environment "CustomerName"
+# Direct module usage
+Import-Module .\Modules\NetworkDiscovery.psm1
+
+$cred = Get-Credential
+$data = Get-PaloAltoDiscovery -Firewalls @("10.25.99.55") -Credential $cred
+
+# View discovered networks
+$data.Firewalls[0].Routes | Where-Object { $_.Destination -ne "0.0.0.0/0" }
 ```
 
-Creates a comprehensive HTML portal with:
-- Dashboard overview
-- Server inventory
-- Active Directory details
-- Network configuration
-- Security posture analysis
-- Capacity planning
-- Risk assessment
+### Output
 
-### 4. Deploy to IIS
+Network discovery saves to:
+- `Environments/[Environment]/Data/network-discovery-[timestamp].json`
+- `Environments/[Environment]/Data/network-discovery-latest.json`
+
+## Modules Reference
+
+### NetworkDiscovery.psm1
 
 ```powershell
-.\Start-InfraDiscovery.ps1 -Action Deploy -Environment "CustomerName" -TargetServer "WEB01" -Hostname "infra.customer.no"
+Import-Module .\Modules\NetworkDiscovery.psm1
+
+# Palo Alto Discovery
+Get-PaloAltoDiscovery -Firewalls @("10.0.0.1") -Credential $cred
+
+# Full network discovery for environment
+Start-NetworkDiscovery -Environment "MyCompany"
+
+# Credential management
+Set-PaloAltoCredential -Environment "MyCompany"
+Get-PaloAltoCredential -Environment "MyCompany"
+```
+
+### PerformanceOptimizer.psm1
+
+```powershell
+Import-Module .\Modules\PerformanceOptimizer.psm1
+
+# Check Defender exclusions
+Get-DefenderExclusions -ComputerName "SERVER01" -Credential $cred
+
+# Deploy Defender exclusions
+Deploy-DefenderExclusions -ComputerName "10.x.x.10" -Credential $cred `
+    -ExclusionPaths @("D:\Apps", "D:\Data") `
+    -ExclusionProcesses @("app.exe")
+
+# Get overall performance status
+Get-PerformanceStatus -ComputerName "SERVER01" -Credential $cred
+```
+
+### JumboFrameDeployer.psm1
+
+```powershell
+Import-Module .\Modules\JumboFrameDeployer.psm1
+
+# Check Jumbo Frame support
+Test-JumboFrameSupport -ComputerName "SERVER01" -Credential $cred
+
+# Get status across servers
+$servers = @{ "APP01" = "10.x.x.10"; "SRV01" = "10.x.x.20" }
+Get-JumboFrameStatus -Servers $servers -Credential $cred
+
+# Interactive deployment wizard
+Start-JumboFrameDeployment -Servers $servers -Credential $cred
 ```
 
 ## Credential Security
@@ -106,22 +196,49 @@ Creates a comprehensive HTML portal with:
 Credentials are stored using Windows DPAPI encryption:
 - Encrypted with current user's Windows credentials
 - Only readable by the user who created them
-- Stored in `Credentials/[Environment]-admin.xml`
+- Stored in `Credentials/[Environment]-admin.xml` (Windows) or `[Environment]-paloalto.xml` (Network)
 
 ```powershell
-# Manually manage credentials
+# Manually manage Windows credentials
 Import-Module .\Modules\CredentialManager.psm1
 Set-InfraCredential -Environment "MyCompany"
 Get-InfraCredential -Environment "MyCompany"
-Remove-InfraCredential -Environment "MyCompany"
+
+# Manage Palo Alto credentials
+Import-Module .\Modules\NetworkDiscovery.psm1
+Set-PaloAltoCredential -Environment "MyCompany"
 ```
 
 ## Requirements
 
 - Windows PowerShell 5.1 or PowerShell 7+
-- Active Directory PowerShell module (RSAT)
+- Active Directory PowerShell module (RSAT) - for AD discovery
 - Admin credentials for target environment
+- For Palo Alto: API access enabled on firewall
 - For IIS deployment: WebAdministration module on target server
+
+## Interactive Menu
+
+```
+  ╔══════════════════════════════════════════════════════════════╗
+  ║            Infrastructure Discovery Framework                 ║
+  ╚══════════════════════════════════════════════════════════════╝
+
+  ┌──────────────────────────────────────────────────────────────┐
+  │  [1] Setup New Environment                                   │
+  │  [2] Run Infrastructure Discovery                            │
+  │  [3] Run Network Discovery (Palo Alto, etc.)                 │
+  │  [4] Generate HTML Portal                                    │
+  │  [5] Deploy Portal to IIS                                    │
+  │  [6] Full Workflow (Discover → Generate → Deploy)            │
+  ├──────────────────────────────────────────────────────────────┤
+  │  [C] Manage Credentials                                      │
+  │  [E] Edit Environment Config                                 │
+  │  [V] Generate Visio Diagrams                                 │
+  │  [P] Performance Optimization                                │
+  │  [J] Jumbo Frames Deployment                                 │
+  └──────────────────────────────────────────────────────────────┘
+```
 
 ## License
 

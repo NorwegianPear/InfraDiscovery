@@ -1,0 +1,124 @@
+{
+    "_metadata": {
+        "description": "Network Infrastructure Template for InfraDiscovery",
+        "version": "1.0.0",
+        "lastUpdated": "",
+        "usage": "Copy to Config/ folder and rename to network-infrastructure.json"
+    },
+    "environment": {
+        "name": "ENVIRONMENT_NAME",
+        "location": "Location",
+        "networkSegment": "10.x.x.0/24"
+    },
+    "firewall": {
+        "model": "",
+        "count": 1,
+        "highAvailability": false,
+        "management": {
+            "type": "on-prem|cloud",
+            "url": ""
+        },
+        "features": {
+            "jumboFrames": {
+                "supported": false,
+                "maxMTU": 1500
+            },
+            "throughput": "",
+            "interfaces": []
+        }
+    },
+    "switches": {
+        "core": {
+            "model": "",
+            "count": 0,
+            "management": {
+                "type": "on-prem|cloud",
+                "url": ""
+            },
+            "features": {
+                "jumboFrames": {
+                    "supported": false,
+                    "maxMTU": 1500
+                },
+                "poe": false,
+                "stackable": false,
+                "uplinks": ""
+            }
+        },
+        "access": {
+            "model": "",
+            "count": 0,
+            "management": {
+                "type": "on-prem|cloud",
+                "url": ""
+            },
+            "features": {
+                "jumboFrames": {
+                    "supported": false,
+                    "maxMTU": 1500
+                },
+                "poe": false,
+                "ports": 0
+            }
+        }
+    },
+    "wireless": {
+        "accessPoints": {
+            "model": "",
+            "count": 0,
+            "standard": "WiFi 6|WiFi 6E|WiFi 7",
+            "management": {
+                "type": "on-prem|cloud",
+                "url": ""
+            }
+        },
+        "controller": {
+            "model": "",
+            "location": "on-prem|cloud"
+        }
+    },
+    "vlans": [
+        {
+            "id": 1,
+            "name": "Default",
+            "subnet": "10.x.x.0/24",
+            "gateway": "10.x.x.1",
+            "description": ""
+        }
+    ],
+    "dhcp": {
+        "servers": [],
+        "scopes": []
+    },
+    "dns": {
+        "primary": "",
+        "secondary": "",
+        "domain": ""
+    },
+    "routing": {
+        "type": "static|dynamic",
+        "protocol": "",
+        "routes": []
+    },
+    "performanceSettings": {
+        "jumboFrames": {
+            "enabled": false,
+            "mtu": 1500,
+            "deployedServers": []
+        },
+        "qos": {
+            "enabled": false,
+            "policies": []
+        },
+        "smb": {
+            "multichannel": true,
+            "signing": false,
+            "encryption": false
+        }
+    },
+    "documentation": {
+        "networkDiagram": "",
+        "ipAllocationSheet": "",
+        "changeLog": []
+    }
+}
