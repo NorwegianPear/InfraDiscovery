@@ -51,6 +51,7 @@ InfraDiscovery/
 │   ├── CredentialManager.psm1  # Secure credential handling
 │   ├── InfraDiscovery.psm1     # Windows infrastructure discovery
 │   ├── NetworkDiscovery.psm1   # Network device discovery (Palo Alto)
+│   ├── NetworkDeviceStatus.psm1 # Live network device monitoring
 │   ├── PortalGenerator.psm1    # HTML portal generation
 │   ├── PortalDeployer.psm1     # IIS deployment
 │   ├── PerformanceOptimizer.psm1  # Performance tuning
@@ -263,5 +264,6 @@ Senior Consultant - Infrastructure
 MIT License - Use freely for any infrastructure documentation needs.  
 © 2026 Atea Norge AS  
 © 2026 Atea Norge AS
+
 
 
