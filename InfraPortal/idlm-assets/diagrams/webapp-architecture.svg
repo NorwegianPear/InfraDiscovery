@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 950" width="1400" height="950">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078D4"/>
+      <stop offset="100%" style="stop-color:#005A9E"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#107C10"/>
+      <stop offset="100%" style="stop-color:#0B5B0B"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0078D4"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#605E5C"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="950" fill="#FAFAFA"/>
+  
+  <!-- Title -->
+  <text x="700" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="26" font-weight="600" fill="#323130">
+    Atea IDLM Portal - Web Application Architecture
+  </text>
+  <text x="700" y="65" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" fill="#605E5C">
+    Frontend SPA structure, authentication flow, and component organization
+  </text>
+  
+  <!-- Main Web App Container -->
+  <g transform="translate(50, 90)">
+    <rect x="0" y="0" width="600" height="550" rx="10" fill="white" stroke="#0078D4" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="600" height="40" rx="10" fill="url(#azureGrad)"/>
+    <text x="300" y="26" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" font-weight="600" fill="white">🌐 Web Application (SPA)</text>
+    
+    <!-- Entry Points -->
+    <g transform="translate(20, 55)">
+      <text x="0" y="15" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Entry Points</text>
+      
+      <rect x="0" y="25" width="130" height="45" rx="4" fill="#E6F2FF" stroke="#0078D4"/>
+      <text x="65" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#0078D4">index.html</text>
+      <text x="65" y="60" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Main Dashboard</text>
+      
+      <rect x="145" y="25" width="130" height="45" rx="4" fill="#FFF4CE" stroke="#FFB900"/>
+      <text x="210" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#996600">setup.html</text>
+      <text x="210" y="60" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Initial Config</text>
+      
+      <rect x="290" y="25" width="130" height="45" rx="4" fill="#F0F0F0" stroke="#BEBBB8"/>
+      <text x="355" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#323130">pages/*.html</text>
+      <text x="355" y="60" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Sub-pages</text>
+      
+      <rect x="435" y="25" width="130" height="45" rx="4" fill="#E8F5E9" stroke="#107C10"/>
+      <text x="500" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#107C10">server.js</text>
+      <text x="500" y="60" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Node.js Server</text>
+    </g>
+    
+    <!-- Core JavaScript Modules -->
+    <g transform="translate(20, 145)">
+      <text x="0" y="15" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Core JavaScript Modules (assets/js/)</text>
+      
+      <!-- Config -->
+      <rect x="0" y="25" width="135" height="80" rx="4" fill="#FFE4E4" stroke="#C62828" filter="url(#shadow)"/>
+      <text x="68" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#C62828">⚙️ config.js</text>
+      <text x="68" y="62" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">AZURE_CLIENT_ID</text>
+      <text x="68" y="74" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">AZURE_TENANT_ID</text>
+      <text x="68" y="86" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">GRAPH_SCOPES</text>
+      <text x="68" y="98" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">needsSetup()</text>
+      
+      <!-- MSAL Auth -->
+      <rect x="145" y="25" width="135" height="80" rx="4" fill="#107C10" filter="url(#shadow)"/>
+      <text x="212" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">🔐 msal-auth.js</text>
+      <text x="212" y="62" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">msalInstance</text>
+      <text x="212" y="74" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">signIn()</text>
+      <text x="212" y="86" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">signOut()</text>
+      <text x="212" y="98" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">getToken()</text>
+      
+      <!-- Auth (legacy) -->
+      <rect x="290" y="25" width="135" height="80" rx="4" fill="#E8F5E9" stroke="#107C10"/>
+      <text x="357" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#107C10">🔑 auth.js</text>
+      <text x="357" y="62" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">AuthHandler</text>
+      <text x="357" y="74" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">isAuthenticated()</text>
+      <text x="357" y="86" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">getUserInfo()</text>
+      <text x="357" y="98" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">handleRedirect()</text>
+      
+      <!-- Graph API -->
+      <rect x="435" y="25" width="130" height="80" rx="4" fill="#0078D4" filter="url(#shadow)"/>
+      <text x="500" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">📡 graph-api.js</text>
+      <text x="500" y="62" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">callGraphAPI()</text>
+      <text x="500" y="74" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">getUsers()</text>
+      <text x="500" y="86" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">getLicenses()</text>
+      <text x="500" y="98" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">getSignIns()</text>
+    </g>
+    
+    <!-- Dashboard Module -->
+    <g transform="translate(20, 265)">
+      <text x="0" y="15" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Dashboard &amp; Visualization</text>
+      
+      <!-- Dashboard -->
+      <rect x="0" y="25" width="180" height="90" rx="4" fill="#0078D4" filter="url(#shadow)"/>
+      <text x="90" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">📊 dashboard.js</text>
+      <text x="90" y="62" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">loadDashboardData()</text>
+      <text x="90" y="74" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">updateStats()</text>
+      <text x="90" y="86" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">renderUserCards()</text>
+      <text x="90" y="98" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">initializeWidgets()</text>
+      
+      <!-- Charts -->
+      <rect x="195" y="25" width="180" height="90" rx="4" fill="#FF8C00" filter="url(#shadow)"/>
+      <text x="285" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">📈 charts.js</text>
+      <text x="285" y="62" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">Chart.js 4.4.1</text>
+      <text x="285" y="74" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">createLicenseChart()</text>
+      <text x="285" y="86" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">createUserTypeChart()</text>
+      <text x="285" y="98" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">createTrendChart()</text>
+      
+      <!-- Signin Map -->
+      <rect x="390" y="25" width="175" height="90" rx="4" fill="#7B1FA2" filter="url(#shadow)"/>
+      <text x="477" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">🗺️ signin-map.js</text>
+      <text x="477" y="62" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">Leaflet 1.9.4</text>
+      <text x="477" y="74" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">initializeMap()</text>
+      <text x="477" y="86" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">addSignInMarkers()</text>
+      <text x="477" y="98" text-anchor="middle" font-family="Consolas" font-size="7" fill="white" opacity="0.9">updateHeatmap()</text>
+    </g>
+    
+    <!-- Page Modules -->
+    <g transform="translate(20, 395)">
+      <text x="0" y="15" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Page Modules (assets/js/pages/)</text>
+      
+      <rect x="0" y="25" width="105" height="55" rx="4" fill="#E3F2FD" stroke="#1565C0"/>
+      <text x="52" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#1565C0">👥 users.js</text>
+      <text x="52" y="62" text-anchor="middle" font-family="Segoe UI, Arial" font-size="7" fill="#605E5C">User Management</text>
+      
+      <rect x="115" y="25" width="105" height="55" rx="4" fill="#F3E5F5" stroke="#7B1FA2"/>
+      <text x="167" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#7B1FA2">📜 licenses.js</text>
+      <text x="167" y="62" text-anchor="middle" font-family="Segoe UI, Arial" font-size="7" fill="#605E5C">License Tracking</text>
+      
+      <rect x="230" y="25" width="105" height="55" rx="4" fill="#FFEBEE" stroke="#C62828"/>
+      <text x="282" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#C62828">🛡️ security.js</text>
+      <text x="282" y="62" text-anchor="middle" font-family="Segoe UI, Arial" font-size="7" fill="#605E5C">Security Status</text>
+      
+      <rect x="345" y="25" width="105" height="55" rx="4" fill="#FFF8E1" stroke="#F9A825"/>
+      <text x="397" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#F9A825">📊 reports.js</text>
+      <text x="397" y="62" text-anchor="middle" font-family="Segoe UI, Arial" font-size="7" fill="#605E5C">Usage Reports</text>
+      
+      <rect x="460" y="25" width="105" height="55" rx="4" fill="#E0F7FA" stroke="#00838F"/>
+      <text x="512" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#00838F">⚙️ settings.js</text>
+      <text x="512" y="62" text-anchor="middle" font-family="Segoe UI, Arial" font-size="7" fill="#605E5C">App Settings</text>
+    </g>
+    
+    <!-- CSS Styles -->
+    <g transform="translate(20, 490)">
+      <text x="0" y="15" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Stylesheets (assets/css/)</text>
+      
+      <rect x="0" y="25" width="180" height="30" rx="4" fill="#F5F5F5" stroke="#BEBBB8"/>
+      <text x="90" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#323130">🎨 styles.css - Base styles</text>
+      
+      <rect x="195" y="25" width="180" height="30" rx="4" fill="#F5F5F5" stroke="#BEBBB8"/>
+      <text x="285" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#323130">📊 dashboard.css - Dashboard</text>
+      
+      <rect x="390" y="25" width="175" height="30" rx="4" fill="#F5F5F5" stroke="#BEBBB8"/>
+      <text x="477" y="45" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#323130">📄 pages.css - Sub-pages</text>
+    </g>
+  </g>
+  
+  <!-- Authentication Flow -->
+  <g transform="translate(700, 90)">
+    <rect x="0" y="0" width="650" height="280" rx="10" fill="white" stroke="#107C10" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="650" height="40" rx="10" fill="url(#greenGrad)"/>
+    <text x="325" y="26" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" font-weight="600" fill="white">🔐 Authentication Flow (MSAL.js + Entra ID)</text>
+    
+    <!-- Flow Steps -->
+    <g transform="translate(20, 60)">
+      <!-- Step 1 -->
+      <rect x="0" y="0" width="140" height="70" rx="6" fill="#E6F2FF" stroke="#0078D4"/>
+      <circle cx="15" cy="15" r="12" fill="#0078D4"/>
+      <text x="15" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">1</text>
+      <text x="80" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#0078D4">User Access</text>
+      <text x="70" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">User opens portal</text>
+      <text x="70" y="55" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">in browser</text>
+      
+      <!-- Arrow 1-2 -->
+      <path d="M145 35 L165 35" stroke="#0078D4" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      
+      <!-- Step 2 -->
+      <rect x="170" y="0" width="140" height="70" rx="6" fill="#FFF4CE" stroke="#FFB900"/>
+      <circle cx="185" cy="15" r="12" fill="#FFB900"/>
+      <text x="185" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">2</text>
+      <text x="250" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#996600">Check Config</text>
+      <text x="240" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">config.js loads</text>
+      <text x="240" y="55" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">needsSetup() check</text>
+      
+      <!-- Arrow 2-3 -->
+      <path d="M315 35 L335 35" stroke="#0078D4" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      
+      <!-- Step 3 -->
+      <rect x="340" y="0" width="140" height="70" rx="6" fill="#E8F5E9" stroke="#107C10"/>
+      <circle cx="355" cy="15" r="12" fill="#107C10"/>
+      <text x="355" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">3</text>
+      <text x="420" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#107C10">MSAL Init</text>
+      <text x="410" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Initialize MSAL</text>
+      <text x="410" y="55" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">PublicClientApp</text>
+      
+      <!-- Arrow 3-4 -->
+      <path d="M485 35 L505 35" stroke="#0078D4" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      
+      <!-- Step 4 -->
+      <rect x="510" y="0" width="100" height="70" rx="6" fill="#0078D4"/>
+      <circle cx="525" cy="15" r="12" fill="white"/>
+      <text x="525" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#0078D4">4</text>
+      <text x="560" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="white">Redirect</text>
+      <text x="560" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="white" opacity="0.9">Redirect to</text>
+      <text x="560" y="55" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="white" opacity="0.9">Entra ID</text>
+    </g>
+    
+    <!-- Second Row -->
+    <g transform="translate(20, 150)">
+      <!-- Step 5 -->
+      <rect x="0" y="0" width="140" height="70" rx="6" fill="#E6F2FF" stroke="#0078D4"/>
+      <circle cx="15" cy="15" r="12" fill="#0078D4"/>
+      <text x="15" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">5</text>
+      <text x="80" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#0078D4">User Login</text>
+      <text x="70" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Enter credentials</text>
+      <text x="70" y="55" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">MFA if required</text>
+      
+      <!-- Arrow 5-6 -->
+      <path d="M145 35 L165 35" stroke="#0078D4" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      
+      <!-- Step 6 -->
+      <rect x="170" y="0" width="140" height="70" rx="6" fill="#107C10"/>
+      <circle cx="185" cy="15" r="12" fill="white"/>
+      <text x="185" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#107C10">6</text>
+      <text x="250" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="white">Token Return</text>
+      <text x="240" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="white" opacity="0.9">Entra returns</text>
+      <text x="240" y="55" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="white" opacity="0.9">access token</text>
+      
+      <!-- Arrow 6-7 -->
+      <path d="M315 35 L335 35" stroke="#0078D4" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      
+      <!-- Step 7 -->
+      <rect x="340" y="0" width="140" height="70" rx="6" fill="#FFF4CE" stroke="#FFB900"/>
+      <circle cx="355" cy="15" r="12" fill="#FFB900"/>
+      <text x="355" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">7</text>
+      <text x="420" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#996600">Store Token</text>
+      <text x="410" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">MSAL stores in</text>
+      <text x="410" y="55" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">sessionStorage</text>
+      
+      <!-- Arrow 7-8 -->
+      <path d="M485 35 L505 35" stroke="#0078D4" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      
+      <!-- Step 8 -->
+      <rect x="510" y="0" width="100" height="70" rx="6" fill="#0078D4"/>
+      <circle cx="525" cy="15" r="12" fill="white"/>
+      <text x="525" y="19" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#0078D4">8</text>
+      <text x="560" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="white">API Call</text>
+      <text x="560" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="white" opacity="0.9">Call Graph</text>
+      <text x="560" y="55" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="white" opacity="0.9">with Bearer</text>
+    </g>
+  </g>
+  
+  <!-- External Dependencies -->
+  <g transform="translate(700, 400)">
+    <rect x="0" y="0" width="650" height="240" rx="10" fill="white" stroke="#7B1FA2" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="650" height="40" rx="10" fill="#7B1FA2"/>
+    <text x="325" y="26" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" font-weight="600" fill="white">📦 External Dependencies &amp; CDN Resources</text>
+    
+    <!-- MSAL -->
+    <g transform="translate(20, 55)">
+      <rect x="0" y="0" width="195" height="80" rx="6" fill="#E8F5E9" stroke="#107C10"/>
+      <text x="98" y="22" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#107C10">🔐 MSAL.js 2.38.3</text>
+      <text x="98" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Microsoft Authentication Library</text>
+      <text x="98" y="58" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">@azure/msal-browser</text>
+      <text x="98" y="72" text-anchor="middle" font-family="Segoe UI, Arial" font-size="7" fill="#107C10">OAuth 2.0 + OIDC + PKCE</text>
+    </g>
+    
+    <!-- Chart.js -->
+    <g transform="translate(230, 55)">
+      <rect x="0" y="0" width="195" height="80" rx="6" fill="#FFF3E0" stroke="#FF8C00"/>
+      <text x="98" y="22" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#FF8C00">📊 Chart.js 4.4.1</text>
+      <text x="98" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Interactive Charts</text>
+      <text x="98" y="58" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">cdn.jsdelivr.net/npm/chart.js</text>
+      <text x="98" y="72" text-anchor="middle" font-family="Segoe UI, Arial" font-size="7" fill="#FF8C00">Pie, Bar, Line, Doughnut</text>
+    </g>
+    
+    <!-- Leaflet -->
+    <g transform="translate(440, 55)">
+      <rect x="0" y="0" width="195" height="80" rx="6" fill="#E0F7FA" stroke="#00838F"/>
+      <text x="98" y="22" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#00838F">🗺️ Leaflet 1.9.4</text>
+      <text x="98" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Interactive Maps</text>
+      <text x="98" y="58" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">unpkg.com/leaflet@1.9.4</text>
+      <text x="98" y="72" text-anchor="middle" font-family="Segoe UI, Arial" font-size="7" fill="#00838F">Sign-in Location Markers</text>
+    </g>
+    
+    <!-- Bootstrap Icons -->
+    <g transform="translate(20, 150)">
+      <rect x="0" y="0" width="195" height="70" rx="6" fill="#F5F5F5" stroke="#BEBBB8"/>
+      <text x="98" y="22" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">🎨 Bootstrap Icons</text>
+      <text x="98" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Icon Library</text>
+      <text x="98" y="58" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">1.11.3</text>
+    </g>
+    
+    <!-- OpenStreetMap -->
+    <g transform="translate(230, 150)">
+      <rect x="0" y="0" width="195" height="70" rx="6" fill="#E3F2FD" stroke="#0078D4"/>
+      <text x="98" y="22" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#0078D4">🌍 OpenStreetMap</text>
+      <text x="98" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Map Tile Provider</text>
+      <text x="98" y="58" text-anchor="middle" font-family="Consolas" font-size="7" fill="#605E5C">tile.openstreetmap.org</text>
+    </g>
+    
+    <!-- No Backend -->
+    <g transform="translate(440, 150)">
+      <rect x="0" y="0" width="195" height="70" rx="6" fill="#107C10"/>
+      <text x="98" y="22" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="white">✅ No Backend API</text>
+      <text x="98" y="42" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="white" opacity="0.9">Static Files Only</text>
+      <text x="98" y="58" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="white" opacity="0.9">All API calls direct to Graph</text>
+    </g>
+  </g>
+  
+  <!-- Navigation Flow -->
+  <g transform="translate(50, 670)">
+    <rect x="0" y="0" width="600" height="150" rx="10" fill="white" stroke="#BEBBB8" filter="url(#shadow)"/>
+    <text x="300" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" font-weight="600" fill="#323130">🧭 Navigation Structure</text>
+    
+    <!-- Nav Items -->
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="80" height="40" rx="4" fill="#0078D4"/>
+      <text x="40" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="white">Dashboard</text>
+      
+      <path d="M85 20 L100 20" stroke="#605E5C" stroke-width="1" fill="none" marker-end="url(#arrowGray)"/>
+      
+      <rect x="105" y="0" width="70" height="40" rx="4" fill="#E6F2FF" stroke="#0078D4"/>
+      <text x="140" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#0078D4">Users</text>
+      
+      <path d="M180 20 L195 20" stroke="#605E5C" stroke-width="1" fill="none" marker-end="url(#arrowGray)"/>
+      
+      <rect x="200" y="0" width="70" height="40" rx="4" fill="#F3E5F5" stroke="#7B1FA2"/>
+      <text x="235" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#7B1FA2">Licenses</text>
+      
+      <path d="M275 20 L290 20" stroke="#605E5C" stroke-width="1" fill="none" marker-end="url(#arrowGray)"/>
+      
+      <rect x="295" y="0" width="70" height="40" rx="4" fill="#FFEBEE" stroke="#C62828"/>
+      <text x="330" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#C62828">Security</text>
+      
+      <path d="M370 20 L385 20" stroke="#605E5C" stroke-width="1" fill="none" marker-end="url(#arrowGray)"/>
+      
+      <rect x="390" y="0" width="70" height="40" rx="4" fill="#FFF8E1" stroke="#F9A825"/>
+      <text x="425" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#F9A825">Reports</text>
+      
+      <path d="M465 20 L480 20" stroke="#605E5C" stroke-width="1" fill="none" marker-end="url(#arrowGray)"/>
+      
+      <rect x="485" y="0" width="70" height="40" rx="4" fill="#E0F7FA" stroke="#00838F"/>
+      <text x="520" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#00838F">Settings</text>
+    </g>
+    
+    <!-- Route Info -->
+    <g transform="translate(20, 100)">
+      <text x="0" y="15" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">Routes: </text>
+      <text x="50" y="15" font-family="Consolas" font-size="8" fill="#0078D4">index.html → pages/users.html → pages/licenses.html → pages/security.html → pages/reports.html → pages/settings.html</text>
+      <text x="0" y="35" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">Auth Check: Each page validates authentication state before loading content</text>
+    </g>
+  </g>
+  
+  <!-- Tech Summary -->
+  <g transform="translate(700, 670)">
+    <rect x="0" y="0" width="320" height="150" rx="10" fill="#0078D4" filter="url(#shadow)"/>
+    <text x="160" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" font-weight="600" fill="white">📋 Technology Summary</text>
+    
+    <text x="20" y="50" font-family="Segoe UI, Arial" font-size="9" fill="white">Frontend:</text>
+    <text x="90" y="50" font-family="Segoe UI, Arial" font-size="9" fill="white" opacity="0.9">HTML5, CSS3, ES6+ JavaScript</text>
+    
+    <text x="20" y="70" font-family="Segoe UI, Arial" font-size="9" fill="white">Architecture:</text>
+    <text x="90" y="70" font-family="Segoe UI, Arial" font-size="9" fill="white" opacity="0.9">SPA (no framework)</text>
+    
+    <text x="20" y="90" font-family="Segoe UI, Arial" font-size="9" fill="white">Backend:</text>
+    <text x="90" y="90" font-family="Segoe UI, Arial" font-size="9" fill="white" opacity="0.9">Node.js static server only</text>
+    
+    <text x="20" y="110" font-family="Segoe UI, Arial" font-size="9" fill="white">API:</text>
+    <text x="90" y="110" font-family="Segoe UI, Arial" font-size="9" fill="white" opacity="0.9">Microsoft Graph (direct)</text>
+    
+    <text x="20" y="130" font-family="Segoe UI, Arial" font-size="9" fill="white">Auth:</text>
+    <text x="90" y="130" font-family="Segoe UI, Arial" font-size="9" fill="white" opacity="0.9">MSAL.js + Entra ID</text>
+  </g>
+  
+  <!-- Key Features -->
+  <g transform="translate(1030, 670)">
+    <rect x="0" y="0" width="320" height="150" rx="10" fill="#107C10" filter="url(#shadow)"/>
+    <text x="160" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="13" font-weight="600" fill="white">✅ Key Features</text>
+    
+    <text x="20" y="50" font-family="Segoe UI, Arial" font-size="9" fill="white">• Zero backend code - all logic in browser</text>
+    <text x="20" y="70" font-family="Segoe UI, Arial" font-size="9" fill="white">• Secure token handling via MSAL</text>
+    <text x="20" y="90" font-family="Segoe UI, Arial" font-size="9" fill="white">• Real-time Graph API data</text>
+    <text x="20" y="110" font-family="Segoe UI, Arial" font-size="9" fill="white">• Interactive charts &amp; maps</text>
+    <text x="20" y="130" font-family="Segoe UI, Arial" font-size="9" fill="white">• Multi-tenant ready configuration</text>
+  </g>
+  
+  <!-- Connection Lines -->
+  <!-- config.js to msal-auth.js -->
+  <line x1="155" y1="250" x2="215" y2="250" stroke="#C62828" stroke-width="1" stroke-dasharray="4,2"/>
+  
+  <!-- msal-auth.js to graph-api.js -->
+  <line x1="358" y1="250" x2="500" y2="250" stroke="#107C10" stroke-width="1" stroke-dasharray="4,2"/>
+  
+  <!-- graph-api.js to dashboard.js -->
+  <line x1="500" y1="315" x2="160" y2="375" stroke="#0078D4" stroke-width="1" stroke-dasharray="4,2"/>
+</svg>

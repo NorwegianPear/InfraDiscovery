@@ -1,0 +1,441 @@
+/* ============================================================================
+   Skeleton Loading States
+   Provides smooth loading animations for better perceived performance
+   ============================================================================ */
+
+/* Base skeleton animation */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Base skeleton element */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--gray-200) 25%,
+    var(--gray-100) 50%,
+    var(--gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--border-radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark mode skeleton */
+[data-theme="dark"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--gray-700) 25%,
+    var(--gray-600) 50%,
+    var(--gray-700) 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* Skeleton text lines */
+.skeleton-text {
+  height: 1em;
+  margin-bottom: 0.5em;
+}
+
+.skeleton-text.skeleton-text-sm {
+  height: 0.75em;
+}
+
+.skeleton-text.skeleton-text-lg {
+  height: 1.5em;
+}
+
+.skeleton-text.skeleton-text-title {
+  height: 2em;
+  width: 60%;
+}
+
+/* Width variations */
+.skeleton-text.w-25 {
+  width: 25%;
+}
+.skeleton-text.w-50 {
+  width: 50%;
+}
+.skeleton-text.w-75 {
+  width: 75%;
+}
+.skeleton-text.w-100 {
+  width: 100%;
+}
+
+/* Skeleton avatar/circle */
+.skeleton-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.skeleton-avatar.skeleton-avatar-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.skeleton-avatar.skeleton-avatar-lg {
+  width: 56px;
+  height: 56px;
+}
+
+/* Skeleton card */
+.skeleton-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .skeleton-card {
+  background: var(--gray-800);
+}
+
+/* Skeleton stat card (for dashboard) */
+.skeleton-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skeleton-stat-card .skeleton-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-sm);
+}
+
+.skeleton-stat-card .skeleton-value {
+  height: 2.5rem;
+  width: 40%;
+}
+
+.skeleton-stat-card .skeleton-label {
+  height: 1rem;
+  width: 70%;
+}
+
+/* Skeleton table */
+.skeleton-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.skeleton-table-row {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+[data-theme="dark"] .skeleton-table-row {
+  border-bottom-color: var(--gray-700);
+}
+
+.skeleton-table-cell {
+  flex: 1;
+}
+
+/* Skeleton chart */
+.skeleton-chart {
+  width: 100%;
+  height: 300px;
+  border-radius: var(--border-radius);
+}
+
+.skeleton-chart-mini {
+  height: 100px;
+}
+
+/* Skeleton button */
+.skeleton-button {
+  height: 40px;
+  width: 120px;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Skeleton badge */
+.skeleton-badge {
+  display: inline-block;
+  height: 24px;
+  width: 80px;
+  border-radius: 12px;
+}
+
+/* ============================================================================
+   Skeleton Templates
+   ============================================================================ */
+
+/* User list skeleton */
+.skeleton-user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.skeleton-user-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  gap: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+[data-theme="dark"] .skeleton-user-item {
+  border-bottom-color: var(--gray-700);
+}
+
+.skeleton-user-item .skeleton-user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeleton-user-item .skeleton-user-name {
+  height: 1rem;
+  width: 150px;
+}
+
+.skeleton-user-item .skeleton-user-email {
+  height: 0.75rem;
+  width: 200px;
+}
+
+.skeleton-user-item .skeleton-user-status {
+  width: 80px;
+  height: 24px;
+  border-radius: 12px;
+}
+
+.skeleton-user-item .skeleton-user-actions {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* Dashboard stat skeleton */
+.skeleton-dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.skeleton-dashboard-stat {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+[data-theme="dark"] .skeleton-dashboard-stat {
+  background: var(--gray-800);
+}
+
+.skeleton-dashboard-stat .skeleton-stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.skeleton-dashboard-stat .skeleton-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-sm);
+}
+
+.skeleton-dashboard-stat .skeleton-stat-trend {
+  width: 60px;
+  height: 24px;
+  border-radius: 12px;
+}
+
+.skeleton-dashboard-stat .skeleton-stat-value {
+  height: 2.5rem;
+  width: 60%;
+}
+
+.skeleton-dashboard-stat .skeleton-stat-label {
+  height: 1rem;
+  width: 80%;
+}
+
+/* License card skeleton */
+.skeleton-license-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+}
+
+[data-theme="dark"] .skeleton-license-card {
+  background: var(--gray-800);
+}
+
+.skeleton-license-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.skeleton-license-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius-sm);
+}
+
+.skeleton-license-title {
+  flex: 1;
+}
+
+.skeleton-license-title .skeleton-text {
+  margin-bottom: 0.25rem;
+}
+
+.skeleton-license-progress {
+  height: 8px;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.skeleton-license-stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.skeleton-license-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Security item skeleton */
+.skeleton-security-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--white);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 0.5rem;
+}
+
+[data-theme="dark"] .skeleton-security-item {
+  background: var(--gray-800);
+}
+
+.skeleton-security-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.skeleton-security-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeleton-security-severity {
+  width: 60px;
+  height: 24px;
+  border-radius: 12px;
+}
+
+/* ============================================================================
+   Helper Component - Generates skeleton HTML
+   ============================================================================ */
+
+/* Skeleton container - hides real content and shows skeleton */
+.skeleton-container {
+  position: relative;
+}
+
+.skeleton-container.loading .skeleton-content {
+  display: none;
+}
+
+.skeleton-container.loading .skeleton-placeholder {
+  display: block;
+}
+
+.skeleton-container:not(.loading) .skeleton-placeholder {
+  display: none;
+}
+
+/* Fade transition when content loads */
+.skeleton-container .skeleton-content {
+  animation: skeleton-fade-in 0.3s ease-out;
+}
+
+@keyframes skeleton-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Inline skeleton for text replacement */
+.skeleton-inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Skeleton paragraph */
+.skeleton-paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeleton-paragraph .skeleton-text:last-child {
+  width: 60%;
+}
+
+/* ============================================================================
+   JavaScript Helper - Use with SkeletonLoader utility
+   ============================================================================ */
+
+/*
+Usage:
+    <div class="skeleton-container loading">
+        <div class="skeleton-placeholder">
+            <!-- Skeleton elements here -->
+        </div>
+        <div class="skeleton-content">
+            <!-- Real content here -->
+        </div>
+    </div>
+
+JavaScript:
+    // Show skeleton
+    element.classList.add('loading');
+    
+    // Hide skeleton, show content
+    element.classList.remove('loading');
+*/

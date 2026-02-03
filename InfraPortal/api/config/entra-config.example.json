@@ -1,0 +1,23 @@
+{
+    "TenantId": "YOUR_TENANT_ID",
+    "ClientId": "YOUR_APP_CLIENT_ID",
+    "ClientSecret": "YOUR_CLIENT_SECRET",
+    
+    "_comment": "SETUP INSTRUCTIONS:",
+    "_step1": "Go to Azure Portal -> Azure Active Directory -> App registrations",
+    "_step2": "Click 'New registration' and name it 'InfraPortal Data Sync'",
+    "_step3": "Under 'API permissions', add these APPLICATION permissions:",
+    "_permissions": [
+        "Microsoft Graph -> User.Read.All",
+        "Microsoft Graph -> Directory.Read.All", 
+        "Microsoft Graph -> AuditLog.Read.All",
+        "Microsoft Graph -> Reports.Read.All",
+        "Microsoft Graph -> Organization.Read.All"
+    ],
+    "_step4": "Click 'Grant admin consent' for all permissions",
+    "_step5": "Go to 'Certificates & secrets' -> 'New client secret'",
+    "_step6": "Copy the secret value (only shown once!) and paste here",
+    "_step7": "Copy the Application (client) ID from the Overview page",
+    "_step8": "Copy the Directory (tenant) ID from the Overview page",
+    "_step9": "Save this file as 'entra-config.json' (remove this example suffix)"
+}

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <!-- Azure Blue Gradient -->
+    <linearGradient id="azureBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#005A9E;stop-opacity:1" />
+    </linearGradient>
+    <!-- Resource Group Background -->
+    <linearGradient id="rgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F3F3F3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E6E6E6;stop-opacity:1" />
+    </linearGradient>
+    <!-- Drop Shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.2"/>
+    </filter>
+    <!-- Azure Icons as symbols -->
+    <symbol id="icon-webapp" viewBox="0 0 50 50">
+      <rect x="5" y="5" width="40" height="40" rx="4" fill="#0078D4"/>
+      <rect x="10" y="12" width="30" height="4" rx="2" fill="white" opacity="0.9"/>
+      <rect x="10" y="20" width="20" height="3" rx="1" fill="white" opacity="0.7"/>
+      <rect x="10" y="26" width="25" height="3" rx="1" fill="white" opacity="0.7"/>
+      <rect x="10" y="32" width="15" height="3" rx="1" fill="white" opacity="0.7"/>
+    </symbol>
+    <symbol id="icon-appservice" viewBox="0 0 50 50">
+      <rect x="5" y="10" width="40" height="30" rx="3" fill="#0078D4"/>
+      <rect x="10" y="15" width="12" height="8" rx="1" fill="white" opacity="0.9"/>
+      <rect x="25" y="15" width="15" height="8" rx="1" fill="white" opacity="0.7"/>
+      <rect x="10" y="27" width="30" height="8" rx="1" fill="white" opacity="0.5"/>
+    </symbol>
+    <symbol id="icon-appinsights" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="20" fill="#68217A"/>
+      <path d="M15 30 L22 22 L28 26 L35 18" stroke="white" stroke-width="2.5" fill="none"/>
+      <circle cx="15" cy="30" r="2.5" fill="white"/>
+      <circle cx="22" cy="22" r="2.5" fill="white"/>
+      <circle cx="28" cy="26" r="2.5" fill="white"/>
+      <circle cx="35" cy="18" r="2.5" fill="white"/>
+    </symbol>
+    <symbol id="icon-keyvault" viewBox="0 0 50 50">
+      <rect x="10" y="8" width="30" height="34" rx="3" fill="#FFB900"/>
+      <circle cx="25" cy="22" r="7" fill="white"/>
+      <rect x="23" y="28" width="4" height="8" fill="white"/>
+      <circle cx="25" cy="22" r="3" fill="#FFB900"/>
+    </symbol>
+    <symbol id="icon-storage" viewBox="0 0 50 50">
+      <rect x="8" y="12" width="34" height="8" rx="2" fill="#0078D4"/>
+      <rect x="8" y="22" width="34" height="8" rx="2" fill="#0078D4" opacity="0.8"/>
+      <rect x="8" y="32" width="34" height="8" rx="2" fill="#0078D4" opacity="0.6"/>
+    </symbol>
+    <symbol id="icon-loganalytics" viewBox="0 0 50 50">
+      <rect x="8" y="8" width="34" height="34" rx="3" fill="#0078D4"/>
+      <rect x="13" y="30" width="6" height="8" fill="white"/>
+      <rect x="22" y="22" width="6" height="16" fill="white"/>
+      <rect x="31" y="14" width="6" height="24" fill="white"/>
+    </symbol>
+    <symbol id="icon-entra" viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="20" fill="#0078D4"/>
+      <circle cx="25" cy="18" r="6" fill="white"/>
+      <path d="M15 38 Q25 28 35 38" fill="white"/>
+    </symbol>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#FAFAFA"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-family="Segoe UI, Arial" font-size="24" font-weight="600" fill="#323130">
+    Atea IDLM Portal - Azure Infrastructure Architecture
+  </text>
+  <text x="600" y="65" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" fill="#605E5C">
+    Deployed via Bicep Infrastructure as Code
+  </text>
+  
+  <!-- Azure Cloud Boundary -->
+  <rect x="50" y="90" width="1100" height="650" rx="10" fill="none" stroke="#0078D4" stroke-width="2" stroke-dasharray="10,5"/>
+  <rect x="60" y="80" width="140" height="24" fill="#0078D4" rx="4"/>
+  <text x="130" y="96" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="white">Microsoft Azure</text>
+  
+  <!-- Resource Group Box -->
+  <rect x="100" y="130" width="1000" height="580" rx="8" fill="url(#rgGradient)" stroke="#BEBBB8" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="110" y="120" width="200" height="24" fill="#605E5C" rx="4"/>
+  <text x="210" y="136" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="white">
+    📦 rg-atea-idlm-{env}
+  </text>
+  
+  <!-- App Service Plan -->
+  <g transform="translate(150, 180)">
+    <rect x="0" y="0" width="280" height="200" rx="6" fill="white" stroke="#BEBBB8" stroke-width="1" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="280" height="30" rx="6" fill="#0078D4"/>
+    <text x="140" y="20" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="white">
+      App Service Plan (asp-atea-idlm-{env})
+    </text>
+    
+    <!-- Web App inside -->
+    <g transform="translate(40, 60)">
+      <use href="#icon-webapp" width="60" height="60"/>
+      <text x="30" y="80" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Web App</text>
+      <text x="30" y="94" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">app-atea-idlm-{env}</text>
+      <text x="30" y="108" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#0078D4">Node.js 18 LTS</text>
+    </g>
+    
+    <!-- Managed Identity badge -->
+    <g transform="translate(150, 60)">
+      <rect x="0" y="0" width="90" height="70" rx="4" fill="#E6F2FF" stroke="#0078D4" stroke-width="1"/>
+      <text x="45" y="20" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#0078D4">Managed</text>
+      <text x="45" y="34" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#0078D4">Identity</text>
+      <text x="45" y="52" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">System Assigned</text>
+    </g>
+    
+    <!-- SKU badge -->
+    <rect x="180" y="150" width="60" height="20" rx="10" fill="#107C10"/>
+    <text x="210" y="164" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">B1/S1</text>
+  </g>
+  
+  <!-- Key Vault -->
+  <g transform="translate(500, 180)">
+    <rect x="0" y="0" width="160" height="140" rx="6" fill="white" stroke="#BEBBB8" stroke-width="1" filter="url(#shadow)"/>
+    <use href="#icon-keyvault" x="55" y="15" width="50" height="50"/>
+    <text x="80" y="80" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#323130">Key Vault</text>
+    <text x="80" y="95" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">kv-ateaidlm{env}</text>
+    <text x="80" y="115" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#FFB900">🔐 Secrets Storage</text>
+  </g>
+  
+  <!-- Storage Account -->
+  <g transform="translate(720, 180)">
+    <rect x="0" y="0" width="160" height="140" rx="6" fill="white" stroke="#BEBBB8" stroke-width="1" filter="url(#shadow)"/>
+    <use href="#icon-storage" x="55" y="15" width="50" height="50"/>
+    <text x="80" y="80" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" font-weight="600" fill="#323130">Storage Account</text>
+    <text x="80" y="95" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">stateaidlm{env}</text>
+    <text x="80" y="115" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#0078D4">📊 Cached Data</text>
+  </g>
+  
+  <!-- App Insights -->
+  <g transform="translate(940, 180)">
+    <rect x="0" y="0" width="140" height="140" rx="6" fill="white" stroke="#BEBBB8" stroke-width="1" filter="url(#shadow)"/>
+    <use href="#icon-appinsights" x="45" y="15" width="50" height="50"/>
+    <text x="70" y="80" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Application</text>
+    <text x="70" y="94" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Insights</text>
+    <text x="70" y="115" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#68217A">📈 Monitoring</text>
+  </g>
+  
+  <!-- Log Analytics Workspace -->
+  <g transform="translate(940, 350)">
+    <rect x="0" y="0" width="140" height="120" rx="6" fill="white" stroke="#BEBBB8" stroke-width="1" filter="url(#shadow)"/>
+    <use href="#icon-loganalytics" x="45" y="10" width="50" height="50"/>
+    <text x="70" y="75" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Log Analytics</text>
+    <text x="70" y="90" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">log-atea-idlm-{env}</text>
+  </g>
+  
+  <!-- Entra ID (External) -->
+  <g transform="translate(500, 380)">
+    <rect x="0" y="0" width="320" height="150" rx="6" fill="#E6F2FF" stroke="#0078D4" stroke-width="2" stroke-dasharray="5,3" filter="url(#shadow)"/>
+    <rect x="10" y="-12" width="120" height="24" fill="#0078D4" rx="4"/>
+    <text x="70" y="4" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="white">Microsoft Entra ID</text>
+    
+    <use href="#icon-entra" x="30" y="25" width="50" height="50"/>
+    <text x="55" y="95" text-anchor="middle" font-family="Segoe UI, Arial" font-size="10" font-weight="600" fill="#323130">App Registration</text>
+    <text x="55" y="110" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#605E5C">Client ID: 904a8d1a...</text>
+    
+    <g transform="translate(130, 25)">
+      <rect x="0" y="0" width="160" height="100" rx="4" fill="white" stroke="#BEBBB8"/>
+      <text x="80" y="18" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" font-weight="600" fill="#323130">API Permissions</text>
+      <text x="10" y="35" font-family="Segoe UI, Arial" font-size="8" fill="#107C10">✓ User.Read.All</text>
+      <text x="10" y="48" font-family="Segoe UI, Arial" font-size="8" fill="#107C10">✓ Directory.Read.All</text>
+      <text x="10" y="61" font-family="Segoe UI, Arial" font-size="8" fill="#107C10">✓ AuditLog.Read.All</text>
+      <text x="10" y="74" font-family="Segoe UI, Arial" font-size="8" fill="#107C10">✓ Policy.Read.All</text>
+      <text x="10" y="87" font-family="Segoe UI, Arial" font-size="8" fill="#107C10">✓ User.Read</text>
+    </g>
+  </g>
+  
+  <!-- RBAC Assignments Box -->
+  <g transform="translate(150, 420)">
+    <rect x="0" y="0" width="280" height="100" rx="6" fill="white" stroke="#FFB900" stroke-width="2" filter="url(#shadow)"/>
+    <text x="140" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">🔐 RBAC Role Assignments</text>
+    <text x="20" y="50" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">• Storage Blob Data Contributor</text>
+    <text x="20" y="68" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">• Storage Table Data Contributor</text>
+    <text x="20" y="86" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">• Key Vault Secrets User</text>
+  </g>
+  
+  <!-- Connections -->
+  <!-- Web App to Key Vault -->
+  <path d="M430 280 L500 280" stroke="#0078D4" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Web App to Storage -->
+  <path d="M430 260 Q550 260 720 260" stroke="#0078D4" stroke-width="2" fill="none"/>
+  
+  <!-- Web App to App Insights -->
+  <path d="M430 220 Q700 180 940 220" stroke="#68217A" stroke-width="2" stroke-dasharray="5,3" fill="none"/>
+  
+  <!-- App Insights to Log Analytics -->
+  <path d="M1010 320 L1010 350" stroke="#68217A" stroke-width="2" fill="none"/>
+  
+  <!-- Web App to Entra -->
+  <path d="M290 380 L290 450 L500 450" stroke="#0078D4" stroke-width="2" fill="none"/>
+  
+  <!-- Legend -->
+  <g transform="translate(100, 570)">
+    <rect x="0" y="0" width="400" height="120" rx="6" fill="white" stroke="#BEBBB8" filter="url(#shadow)"/>
+    <text x="200" y="20" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">Legend</text>
+    
+    <line x1="20" y1="40" x2="60" y2="40" stroke="#0078D4" stroke-width="2"/>
+    <text x="70" y="44" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">Data Flow</text>
+    
+    <line x1="20" y1="60" x2="60" y2="60" stroke="#68217A" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="70" y="64" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">Telemetry</text>
+    
+    <line x1="20" y1="80" x2="60" y2="80" stroke="#0078D4" stroke-width="2" stroke-dasharray="10,5"/>
+    <text x="70" y="84" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">Cloud Boundary</text>
+    
+    <rect x="200" y="35" width="20" height="12" fill="#E6F2FF" stroke="#0078D4"/>
+    <text x="230" y="44" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">External Service</text>
+    
+    <rect x="200" y="55" width="20" height="12" fill="white" stroke="#BEBBB8"/>
+    <text x="230" y="64" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">Azure Resource</text>
+    
+    <rect x="200" y="75" width="20" height="12" fill="url(#rgGradient)" stroke="#BEBBB8"/>
+    <text x="230" y="84" font-family="Segoe UI, Arial" font-size="9" fill="#605E5C">Resource Group</text>
+  </g>
+  
+  <!-- Bicep Badge -->
+  <g transform="translate(600, 570)">
+    <rect x="0" y="0" width="250" height="120" rx="6" fill="white" stroke="#BEBBB8" filter="url(#shadow)"/>
+    <text x="125" y="20" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="#323130">🏗️ Bicep IaC Modules</text>
+    <text x="20" y="42" font-family="Consolas, monospace" font-size="8" fill="#0078D4">├── main.bicep</text>
+    <text x="20" y="56" font-family="Consolas, monospace" font-size="8" fill="#605E5C">├── modules/</text>
+    <text x="20" y="70" font-family="Consolas, monospace" font-size="8" fill="#605E5C">│   ├── app-service-plan.bicep</text>
+    <text x="20" y="84" font-family="Consolas, monospace" font-size="8" fill="#605E5C">│   ├── web-app.bicep</text>
+    <text x="20" y="98" font-family="Consolas, monospace" font-size="8" fill="#605E5C">│   ├── key-vault.bicep</text>
+    <text x="20" y="112" font-family="Consolas, monospace" font-size="8" fill="#605E5C">│   └── storage-account.bicep</text>
+  </g>
+  
+  <!-- Deployment Info -->
+  <g transform="translate(900, 570)">
+    <rect x="0" y="0" width="180" height="120" rx="6" fill="#0078D4" filter="url(#shadow)"/>
+    <text x="90" y="25" text-anchor="middle" font-family="Segoe UI, Arial" font-size="11" font-weight="600" fill="white">🚀 Deployment</text>
+    <text x="90" y="50" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="white" opacity="0.9">Deploy-FullAzure.ps1</text>
+    <text x="90" y="68" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="white" opacity="0.9">Deploy-Customer.ps1</text>
+    <text x="90" y="86" text-anchor="middle" font-family="Segoe UI, Arial" font-size="9" fill="white" opacity="0.9">GitHub Actions</text>
+    <text x="90" y="108" text-anchor="middle" font-family="Segoe UI, Arial" font-size="8" fill="#FFB900">Region: norwayeast</text>
+  </g>
+</svg>

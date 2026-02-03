@@ -1,0 +1,52 @@
+{
+  "Locations": [
+    {
+      "Country": "NO",
+      "Count": 1460
+    },
+    {
+      "Country": "US",
+      "Count": 6
+    },
+    {
+      "Country": "LV",
+      "Count": 5
+    },
+    {
+      "Country": "ES",
+      "Count": 2
+    },
+    {
+      "Country": "PT",
+      "Count": 2
+    },
+    {
+      "Country": "DE",
+      "Count": 1
+    },
+    {
+      "Country": "FR",
+      "Count": 1
+    },
+    {
+      "Country": "KE",
+      "Count": 1
+    },
+    {
+      "Country": "RU",
+      "Count": 1
+    },
+    {
+      "Country": "SE",
+      "Count": 1
+    }
+  ],
+  "Statistics": {
+    "Failed": 152,
+    "Risky": 2,
+    "UniqueCountries": 10,
+    "Successful": 1340,
+    "Total": 1492
+  },
+  "LastUpdate": "2026-02-01T17:47:14Z"
+}

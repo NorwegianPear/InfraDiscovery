@@ -1,0 +1,357 @@
+{
+  "Licenses": {
+    "InactiveLicensed": 15,
+    "Details": [
+      {
+        "Consumed": 1,
+        "SkuPartNumber": "VISIOCLIENT",
+        "UnitPrice": 150,
+        "Total": 1,
+        "SkuId": "c5928f49-12ba-48f7-ada3-0d743a3601d5",
+        "Available": 0,
+        "MonthlyCost": 150,
+        "DisplayName": "VISIOCLIENT"
+      },
+      {
+        "Consumed": 3,
+        "SkuPartNumber": "Microsoft_365_Copilot",
+        "UnitPrice": 360,
+        "Total": 1,
+        "SkuId": "639dec6b-bb19-468b-871c-c5c441c4b0cb",
+        "Available": -2,
+        "MonthlyCost": 1080,
+        "DisplayName": "Microsoft 365 Copilot"
+      },
+      {
+        "Consumed": 0,
+        "SkuPartNumber": "WINDOWS_STORE",
+        "UnitPrice": 0,
+        "Total": 0,
+        "SkuId": "6470687e-a428-4b7a-bef2-8a291ad947c9",
+        "Available": 0,
+        "MonthlyCost": 0,
+        "DisplayName": "WINDOWS STORE"
+      },
+      {
+        "Consumed": 31,
+        "SkuPartNumber": "FLOW_FREE",
+        "UnitPrice": 0,
+        "Total": 10000,
+        "SkuId": "f30db892-07e9-47e9-837c-80727f46fd3d",
+        "Available": 9969,
+        "MonthlyCost": 0,
+        "DisplayName": "FLOW FREE"
+      },
+      {
+        "Consumed": 54,
+        "SkuPartNumber": "IDENTITY_THREAT_PROTECTION",
+        "UnitPrice": 54,
+        "Total": 55,
+        "SkuId": "26124093-3d78-432b-b5dc-48bf992543d5",
+        "Available": 1,
+        "MonthlyCost": 2916,
+        "DisplayName": "IDENTITY THREAT PROTECTION"
+      },
+      {
+        "Consumed": 7,
+        "SkuPartNumber": "EXCHANGESTANDARD",
+        "UnitPrice": 45,
+        "Total": 7,
+        "SkuId": "4b9405b0-7788-4568-add1-99614e613b69",
+        "Available": 0,
+        "MonthlyCost": 315,
+        "DisplayName": "EXCHANGESTANDARD"
+      },
+      {
+        "Consumed": 0,
+        "SkuPartNumber": "Microsoft_Teams_Exploratory_Dept",
+        "UnitPrice": 0,
+        "Total": 0,
+        "SkuId": "e0dfc8b9-9531-4ec8-94b4-9fec23b05fc8",
+        "Available": 0,
+        "MonthlyCost": 0,
+        "DisplayName": "Microsoft Teams Exploratory Dept"
+      },
+      {
+        "Consumed": 3,
+        "SkuPartNumber": "POWER_BI_STANDARD",
+        "UnitPrice": 0,
+        "Total": 1000000,
+        "SkuId": "a403ebcc-fae0-4ca2-8c8c-7a907fd6c235",
+        "Available": 999997,
+        "MonthlyCost": 0,
+        "DisplayName": "POWER BI STANDARD"
+      },
+      {
+        "Consumed": 6,
+        "SkuPartNumber": "Office_365_w/o_Teams_Bundle_E1",
+        "UnitPrice": 78,
+        "Total": 6,
+        "SkuId": "b57282e3-65bd-4252-9502-c0eae1e5ab7f",
+        "Available": 0,
+        "MonthlyCost": 468,
+        "DisplayName": "Office 365 w/o Teams Bundle E1"
+      },
+      {
+        "Consumed": 1,
+        "SkuPartNumber": "Microsoft_Teams_EEA_New",
+        "UnitPrice": 45,
+        "Total": 1,
+        "SkuId": "7e74bd05-2c47-404e-829a-ba95c66fe8e5",
+        "Available": 0,
+        "MonthlyCost": 45,
+        "DisplayName": "Microsoft Teams EEA New"
+      },
+      {
+        "Consumed": 56,
+        "SkuPartNumber": "SPE_E3",
+        "UnitPrice": 380,
+        "Total": 57,
+        "SkuId": "05e9a617-0261-4cee-bb44-138d3ef5d965",
+        "Available": 1,
+        "MonthlyCost": 21280,
+        "DisplayName": "SPE E3"
+      },
+      {
+        "Consumed": 2,
+        "SkuPartNumber": "Microsoft_Teams_Rooms_Pro",
+        "UnitPrice": 380,
+        "Total": 2,
+        "SkuId": "4cde982a-ede4-4409-9ae6-b003453c8ea6",
+        "Available": 0,
+        "MonthlyCost": 760,
+        "DisplayName": "Microsoft Teams Rooms Pro"
+      },
+      {
+        "Consumed": 2,
+        "SkuPartNumber": "Microsoft_365_Business_Basic_EEA_(no_Teams)",
+        "UnitPrice": 55,
+        "Total": 2,
+        "SkuId": "b1f3042b-a390-4b56-ab61-b88e7e767a97",
+        "Available": 0,
+        "MonthlyCost": 110,
+        "DisplayName": "Microsoft 365 Business Basic EEA (no Teams)"
+      },
+      {
+        "Consumed": 1,
+        "SkuPartNumber": "POWERAPPS_DEV",
+        "UnitPrice": 0,
+        "Total": 10000,
+        "SkuId": "5b631642-bd26-49fe-bd20-1daaa972ef80",
+        "Available": 9999,
+        "MonthlyCost": 0,
+        "DisplayName": "POWERAPPS DEV"
+      }
+    ],
+    "DisabledLicensed": 0,
+    "DisabledUserCost": 0,
+    "InactiveUserCost": 4575,
+    "TotalCost": 27124,
+    "PotentialSavings": 4575
+  },
+  "Users": {
+    "Inactive": 114,
+    "Synced": 73,
+    "Enabled": 191,
+    "Active": 87,
+    "Members": [
+      {
+        "DeletedDateTime": null,
+        "Id": "cc0f37b7-77c3-496c-93bc-b9e4e46f68e1",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [],
+          "displayName": "Rana Administrator",
+          "givenName": "Rana Administrator",
+          "mobilePhone": "+4748854087",
+          "userPrincipalName": "radmin@jaeder.no"
+        }
+      },
+      {
+        "DeletedDateTime": null,
+        "Id": "1d92d226-d537-4d2f-9d48-a7a2c26c475c",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [
+            "+37127271736"
+          ],
+          "displayName": "ATEA ADMIN Aleksandra Bilcane",
+          "givenName": "Aleksandra",
+          "jobTitle": "ATEA - Security Management Consultant • Security Team",
+          "mobilePhone": "+37127271736",
+          "officeLocation": "ATEA - Riga",
+          "surname": "Bilcane",
+          "userPrincipalName": "adm_a.bilcane@jaeder.no"
+        }
+      },
+      {
+        "DeletedDateTime": null,
+        "Id": "23ccdd9b-1709-4f06-a6dd-9773225274b5",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [],
+          "displayName": "ATEA ADMIN Emīls Vītoliņš",
+          "givenName": "Emīls",
+          "jobTitle": "ATEA - Security Management Consultant • Security Team",
+          "mobilePhone": "+371 26656700",
+          "officeLocation": "Riga",
+          "surname": "Vītoliņš",
+          "userPrincipalName": "adm_e.vitolins@jaeder.no"
+        }
+      },
+      {
+        "DeletedDateTime": null,
+        "Id": "554b35ce-2e4b-43c0-90fc-a6320fbfe020",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [],
+          "displayName": "ATEA ADMIN Mikus Krevics",
+          "givenName": "Mikus",
+          "mobilePhone": "+371 26478574",
+          "surname": "Krevics",
+          "userPrincipalName": "adm_m.krevics@jaeder.no"
+        }
+      },
+      {
+        "DeletedDateTime": null,
+        "Id": "73e36fde-8426-443f-9b3b-2b93af0b0715",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [],
+          "displayName": "ATEA ADMIN Laura Dzalbe",
+          "givenName": "Laura",
+          "mobilePhone": "+371 20300225",
+          "surname": "Dzalbe",
+          "userPrincipalName": "adm_l.dzalbe@jaeder.no"
+        }
+      },
+      {
+        "DeletedDateTime": null,
+        "Id": "0c15c9d1-9531-4367-b09e-6d27595d270a",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [],
+          "displayName": "ATEA ADMIN Gatis Jankovskis",
+          "givenName": "Gatis",
+          "mobilePhone": "+371 26156772",
+          "surname": "Jankovskis",
+          "userPrincipalName": "adm_g.jankovskis@jaeder.no"
+        }
+      },
+      {
+        "DeletedDateTime": null,
+        "Id": "e1ce60c3-f2db-4691-bb2d-d8c9e638de31",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [],
+          "displayName": "ATEA ADMIN Irina Lapkovska",
+          "givenName": "Irina",
+          "mobilePhone": "+371 27086580",
+          "surname": "Lapkovska",
+          "userPrincipalName": "adm_i.lapkovska@jaeder.no"
+        }
+      },
+      {
+        "DeletedDateTime": null,
+        "Id": "0d7d3c96-0578-484b-bf91-30f27e4f6fa0",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [],
+          "displayName": "ATEA ADMIN Nauris Meznieks",
+          "givenName": "Nauris",
+          "mobilePhone": "+37126120051",
+          "surname": "Meznieks",
+          "userPrincipalName": "adm_n.meznieks@jaeder.no"
+        }
+      },
+      {
+        "DeletedDateTime": null,
+        "Id": "612c4a6c-1880-4be3-93ad-8e51a2f4bc67",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [],
+          "displayName": "ADMIN Tor Gabriel Espeland",
+          "givenName": "Tor Gabriel",
+          "surname": "Espeland",
+          "userPrincipalName": "adm_tg@jaeder.no"
+        }
+      },
+      {
+        "DeletedDateTime": null,
+        "Id": "2dad1416-0280-4ac8-a249-4bceed0eb87a",
+        "AdditionalProperties": {
+          "@odata.type": "#microsoft.graph.user",
+          "businessPhones": [],
+          "displayName": "ATEA ADMIN Kristaps Valainis",
+          "givenName": "Kristaps",
+          "mobilePhone": "+371 20036668",
+          "surname": "Valainis",
+          "userPrincipalName": "adm.kv@jaeder.no"
+        }
+      }
+    ],
+    "Total": 201,
+    "Licensed": 74,
+    "Unlicensed": 127,
+    "Guests": 55,
+    "Disabled": 10
+  },
+  "Security": {
+    "MfaPercentage": 51.8,
+    "MfaRegistered": 99,
+    "AdminRoles": {
+      "SharePoint Administrator": 1,
+      "Global Administrator": 6,
+      "Cloud App Security Administrator": 2,
+      "Privileged Authentication Administrator": 1,
+      "Application Administrator": 2,
+      "Intune Administrator": 11,
+      "Exchange Administrator": 10,
+      "Authentication Extensibility Administrator": 1,
+      "Cloud Application Administrator": 9,
+      "Directory Synchronization Accounts": 2,
+      "Global Reader": 9,
+      "User Administrator": 7,
+      "Compliance Administrator": 1,
+      "Security Administrator": 14,
+      "Teams Administrator": 2,
+      "Compliance Data Administrator": 1
+    },
+    "GlobalAdmins": 6,
+    "MfaNotRegistered": 92,
+    "PrivilegedRoles": 79
+  },
+  "Organization": {
+    "Domain": "jaeder.no",
+    "TenantId": "b0a70db4-583a-47b0-accd-da305691f609",
+    "DisplayName": "Jæder AS"
+  },
+  "SignIns": {
+    "Locations": [
+      {
+        "Country": "NO",
+        "Count": 496
+      },
+      {
+        "Country": "US",
+        "Count": 2
+      },
+      {
+        "Country": "GB",
+        "Count": 1
+      }
+    ],
+    "Statistics": {
+      "Failed": 42,
+      "Risky": 0,
+      "UniqueCountries": 3,
+      "Successful": 458,
+      "Total": 500
+    }
+  },
+  "SyncInfo": {
+    "LastSync": "2026-02-02T15:11:00Z",
+    "RefreshRate": "Every 15 minutes",
+    "DataSource": "Microsoft Graph API"
+  }
+}

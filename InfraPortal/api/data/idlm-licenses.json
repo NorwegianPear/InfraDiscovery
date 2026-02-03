@@ -1,0 +1,151 @@
+{
+  "InactiveLicensed": 15,
+  "UnassignedCount": 1019965.0,
+  "PotentialSavings": 4500,
+  "TotalCost": 21745,
+  "InactiveUserCost": 4500,
+  "DisabledUserCost": 0,
+  "Details": [
+    {
+      "Available": 0,
+      "Total": 1,
+      "SkuPartNumber": "VISIOCLIENT",
+      "DisplayName": "VISIOCLIENT",
+      "MonthlyCost": 150,
+      "UnitPrice": 150,
+      "SkuId": "c5928f49-12ba-48f7-ada3-0d743a3601d5",
+      "Consumed": 1
+    },
+    {
+      "Available": -2,
+      "Total": 1,
+      "SkuPartNumber": "Microsoft_365_Copilot",
+      "DisplayName": "Microsoft 365 Copilot",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "639dec6b-bb19-468b-871c-c5c441c4b0cb",
+      "Consumed": 3
+    },
+    {
+      "Available": 0,
+      "Total": 0,
+      "SkuPartNumber": "WINDOWS_STORE",
+      "DisplayName": "WINDOWS STORE",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "6470687e-a428-4b7a-bef2-8a291ad947c9",
+      "Consumed": 0
+    },
+    {
+      "Available": 9969,
+      "Total": 10000,
+      "SkuPartNumber": "FLOW_FREE",
+      "DisplayName": "FLOW FREE",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "f30db892-07e9-47e9-837c-80727f46fd3d",
+      "Consumed": 31
+    },
+    {
+      "Available": 1,
+      "Total": 55,
+      "SkuPartNumber": "IDENTITY_THREAT_PROTECTION",
+      "DisplayName": "IDENTITY THREAT PROTECTION",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "26124093-3d78-432b-b5dc-48bf992543d5",
+      "Consumed": 54
+    },
+    {
+      "Available": 0,
+      "Total": 7,
+      "SkuPartNumber": "EXCHANGESTANDARD",
+      "DisplayName": "EXCHANGESTANDARD",
+      "MonthlyCost": 315,
+      "UnitPrice": 45,
+      "SkuId": "4b9405b0-7788-4568-add1-99614e613b69",
+      "Consumed": 7
+    },
+    {
+      "Available": 0,
+      "Total": 0,
+      "SkuPartNumber": "Microsoft_Teams_Exploratory_Dept",
+      "DisplayName": "Microsoft Teams Exploratory Dept",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "e0dfc8b9-9531-4ec8-94b4-9fec23b05fc8",
+      "Consumed": 0
+    },
+    {
+      "Available": 999997,
+      "Total": 1000000,
+      "SkuPartNumber": "POWER_BI_STANDARD",
+      "DisplayName": "POWER BI STANDARD",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "a403ebcc-fae0-4ca2-8c8c-7a907fd6c235",
+      "Consumed": 3
+    },
+    {
+      "Available": 0,
+      "Total": 6,
+      "SkuPartNumber": "Office_365_w/o_Teams_Bundle_E1",
+      "DisplayName": "Office 365 w/o Teams Bundle E1",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "b57282e3-65bd-4252-9502-c0eae1e5ab7f",
+      "Consumed": 6
+    },
+    {
+      "Available": 0,
+      "Total": 1,
+      "SkuPartNumber": "Microsoft_Teams_EEA_New",
+      "DisplayName": "Microsoft Teams EEA New",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "7e74bd05-2c47-404e-829a-ba95c66fe8e5",
+      "Consumed": 1
+    },
+    {
+      "Available": 1,
+      "Total": 57,
+      "SkuPartNumber": "SPE_E3",
+      "DisplayName": "SPE E3",
+      "MonthlyCost": 21280,
+      "UnitPrice": 380,
+      "SkuId": "05e9a617-0261-4cee-bb44-138d3ef5d965",
+      "Consumed": 56
+    },
+    {
+      "Available": 0,
+      "Total": 2,
+      "SkuPartNumber": "Microsoft_Teams_Rooms_Pro",
+      "DisplayName": "Microsoft Teams Rooms Pro",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "4cde982a-ede4-4409-9ae6-b003453c8ea6",
+      "Consumed": 2
+    },
+    {
+      "Available": 0,
+      "Total": 2,
+      "SkuPartNumber": "Microsoft_365_Business_Basic_EEA_(no_Teams)",
+      "DisplayName": "Microsoft 365 Business Basic EEA (no Teams)",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "b1f3042b-a390-4b56-ab61-b88e7e767a97",
+      "Consumed": 2
+    },
+    {
+      "Available": 9999,
+      "Total": 10000,
+      "SkuPartNumber": "POWERAPPS_DEV",
+      "DisplayName": "POWERAPPS DEV",
+      "MonthlyCost": 0,
+      "UnitPrice": 0,
+      "SkuId": "5b631642-bd26-49fe-bd20-1daaa972ef80",
+      "Consumed": 1
+    }
+  ],
+  "DisabledLicensed": 0
+}

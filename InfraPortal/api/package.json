@@ -1,0 +1,15 @@
+{
+  "name": "infraportal-api",
+  "version": "1.0.0",
+  "description": "API server for Espeland Infrastructure Portal with live Entra ID data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "author": "Uy Le Thai Phan <uy.phan@atea.no>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
