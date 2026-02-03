@@ -1476,14 +1476,20 @@
             fill: inherit;
         }
         
-        /* Node hover - Clean border highlight, NO glow effects */
+        /* Node hover - Scale effect for clarity, NO glow effects */
         .diagram-node-hover {
             cursor: pointer;
+            transition: transform 0.2s ease;
+            transform-origin: center;
+            transform-box: fill-box;
         }
         .diagram-node-hover > rect,
         .diagram-node-hover > ellipse,
         .diagram-node-hover > circle {
             transition: stroke 0.15s ease, stroke-width 0.15s ease;
+        }
+        .diagram-node-hover:hover {
+            transform: scale(1.08);
         }
         .diagram-node-hover:hover > rect,
         .diagram-node-hover:hover > ellipse,
@@ -1511,12 +1517,18 @@
             margin-bottom: 25px;
         }
         
-        /* Container hover - larger boxes - subtle effect - NO FILTER to keep text sharp */
+        /* Container hover - larger boxes - scale effect for clarity */
         .diagram-container-hover {
             cursor: pointer;
+            transition: transform 0.2s ease;
+            transform-origin: center;
+            transform-box: fill-box;
         }
         .diagram-container-hover > rect {
             transition: stroke-width 0.2s ease, stroke 0.2s ease;
+        }
+        .diagram-container-hover:hover {
+            transform: scale(1.03);
         }
         .diagram-container-hover:hover > rect {
             stroke-width: 3;
@@ -1524,25 +1536,27 @@
             /* NO filter - keeps text readable */
         }
         
-        /* Data line hover - traffic lines - enhanced visibility */
+        /* Data line hover - traffic lines - enhanced visibility without glow */
         .diagram-line-hover {
             cursor: pointer;
-            transition: stroke-width 0.2s ease, filter 0.2s ease;
+            transition: stroke-width 0.2s ease, opacity 0.2s ease;
         }
         .diagram-line-hover:hover {
             stroke-width: 8 !important;
-            filter: drop-shadow(0 0 6px currentColor);
+            opacity: 1;
+            /* NO filter/glow - keeps adjacent text readable */
         }
         
         /* Animated data flow line */
         .diagram-flow-line {
             stroke-linecap: round;
             cursor: pointer;
-            transition: stroke-width 0.2s ease;
+            transition: stroke-width 0.2s ease, opacity 0.2s ease;
         }
         .diagram-flow-line:hover {
             stroke-width: 10 !important;
-            filter: drop-shadow(0 0 8px currentColor);
+            opacity: 1;
+            /* NO filter/glow - keeps adjacent text readable */
         }
         
         /* Service account badge - subtle hover */
@@ -2170,10 +2184,36 @@
         <!-- Page Contents -->
         <div id="page-overview" class="page-content active">
             <div class="page-header">
-                <h1>📊 Overview</h1>
-                <div class="breadcrumb">Overview / Portal Home</div>
+                <h1>📊 Infrastructure Dashboard</h1>
+                <div class="breadcrumb">Overview / Dashboard</div>
             </div>
             <div class="page-body">
+                <!-- WELCOME MESSAGE -->
+                <div class="card" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-left: 4px solid #3b82f6; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="margin: 0 0 12px 0; color: #1e40af; display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.3em;">📊</span> Welcome to Dalir Infrastructure Portal
+                        </h3>
+                        <p style="color: var(--text-secondary); margin: 0 0 15px 0; line-height: 1.6;">
+                            This portal provides <strong>real-time monitoring</strong> and comprehensive documentation of the Dalir IT infrastructure. 
+                            Track server health, network topology, Active Directory, capacity planning, and security posture — all in one place.
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <a href="#" onclick="showPage('monitoring'); return false;" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: #22c55e; color: white; text-decoration: none; border-radius: 6px; font-size: 0.9em; font-weight: 500;">📡 Live Monitoring</a>
+                            <a href="#" onclick="showPage('network'); return false;" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: #8b5cf6; color: white; text-decoration: none; border-radius: 6px; font-size: 0.9em; font-weight: 500;">🌐 Network Topology</a>
+                            <a href="#" onclick="showPage('ad'); return false;" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: #f59e0b; color: white; text-decoration: none; border-radius: 6px; font-size: 0.9em; font-weight: 500;">🏢 AD Management</a>
+                            <a href="#" onclick="showPage('upgrade'); return false;" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: #6366f1; color: white; text-decoration: none; border-radius: 6px; font-size: 0.9em; font-weight: 500;">📈 Capacity Planning</a>
+                        </div>
+                    </div>
+                    <div style="background: rgba(59,130,246,0.08); padding: 15px 20px; border-radius: 10px; min-width: 200px;">
+                        <div style="color: #f59e0b; font-size: 0.85em; font-weight: 600; margin-bottom: 8px;">◆ DATA COLLECTION</div>
+                        <div style="color: var(--text-primary); font-size: 0.95em;"><strong>Last Update:</strong> <span id="welcomeLastUpdate">-</span></div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em; margin-top: 4px;">Auto-refresh: <strong>Every 3 days</strong> at 06:00</div>
+                        <a href="#" onclick="showPage('changelog'); return false;" style="color: #3b82f6; font-size: 0.85em; margin-top: 8px; display: inline-block;">View Changelog →</a>
+                    </div>
+                </div>
+                <!-- END WELCOME MESSAGE -->
+                
                 <!-- LIVE DATA DASHBOARD -->
                 <div class="card" style="background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%); color: white; margin-bottom: 25px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -7000,10 +7040,10 @@ snmpwalk -v2c -c espeland-ro 172.24.6.2 1.3.6.1.4.1.9.9.46.1.3.1</pre>
                                 <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
                             </filter>
                             <style>
-                                .diagram-container-hover { transition: all 0.3s ease; }
-                                .diagram-container-hover:hover { stroke-width: 4; stroke: var(--accent-blue, #3b82f6); filter: drop-shadow(0 0 6px rgba(59,130,246,0.4)); }
-                                .diagram-node-hover { transition: all 0.2s ease; cursor: pointer; transform-origin: center; transform-box: fill-box; }
-                                .diagram-node-hover:hover { stroke: var(--accent-blue, #3b82f6); stroke-width: 3; filter: drop-shadow(0 0 4px rgba(59,130,246,0.3)); }
+                                .diagram-container-hover { transition: transform 0.2s ease, stroke-width 0.2s ease; transform-origin: center; transform-box: fill-box; cursor: pointer; }
+                                .diagram-container-hover:hover { transform: scale(1.03); stroke-width: 4; stroke: var(--accent-blue, #3b82f6); }
+                                .diagram-node-hover { transition: transform 0.2s ease, stroke-width 0.2s ease; cursor: pointer; transform-origin: center; transform-box: fill-box; }
+                                .diagram-node-hover:hover { transform: scale(1.08); stroke: var(--accent-blue, #3b82f6); stroke-width: 3; }
                             </style>
                         </defs>
                         
@@ -16124,7 +16164,11 @@ snmpwalk -v2c -c espeland-ro 172.24.6.2 1.3.6.1.4.1.9.9.46.1.3.1</pre>
                     document.getElementById('expiringCertsCount').textContent = '0';
                     
                     // Update timestamp
-                    document.getElementById('dataCollectedAt').textContent = timestamp || new Date().toLocaleString('nb-NO');
+                    const displayTimestamp = timestamp || new Date().toLocaleString('nb-NO');
+                    document.getElementById('dataCollectedAt').textContent = displayTimestamp;
+                    // Also update welcome message timestamp
+                    const welcomeUpdate = document.getElementById('welcomeLastUpdate');
+                    if (welcomeUpdate) welcomeUpdate.textContent = displayTimestamp;
                     
                     // Calculate next collection (15 min from timestamp)
                     if (timestamp) {
