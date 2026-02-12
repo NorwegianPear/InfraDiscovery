@@ -15453,25 +15453,25 @@ Set-NetAdapterAdvancedProperty -Name "Ethernet" -RegistryKeyword "*JumboPacket" 
                                     </div>
                                 </div>
 
-                                <div class="card clickable-card" onclick="IDLMController.showPage('idlm-licenses')" title="Click to view unassigned licenses">
+                                <div class="card clickable-card" onclick="IDLMController.showPage('idlm-licenses')" title="Click to view inactive licensed users">
                                     <div class="card-header">
-                                        <h3 class="card-title">Unassigned</h3>
-                                        <span class="card-action">→</span>
+                                        <h3 class="card-title">Inactive Licensed</h3>
+                                        <span class="card-badge warning">⚠</span>
                                     </div>
                                     <div class="card-body">
-                                        <div class="stat-value warning">${licenses.UnassignedCount || 0}</div>
-                                        <div class="stat-description">Not assigned to users</div>
+                                        <div class="stat-value warning">${licenses.InactiveLicensed || 0}</div>
+                                        <div class="stat-description">Inactive users with licenses</div>
                                     </div>
                                 </div>
 
-                                <div class="card clickable-card" onclick="IDLMController.showPage('idlm-licenses')" title="Click to view inactive user licenses">
+                                <div class="card clickable-card" onclick="IDLMController.showPage('idlm-mitigation')" title="Click to view annual savings">
                                     <div class="card-header">
-                                        <h3 class="card-title">Inactive</h3>
-                                        <span class="card-action">→</span>
+                                        <h3 class="card-title">Annual Savings</h3>
+                                        
                                     </div>
                                     <div class="card-body">
-                                        <div class="stat-value warning">${inactiveUsers}</div>
-                                        <div class="stat-description">Assigned to inactive users</div>
+                                        <div class="stat-value success">${((licenses.PotentialSavings || 0) * 12).toLocaleString()}</div>
+                                        <div class="stat-description">Yearly saving potential (NOK)</div>
                                     </div>
                                 </div>
 
@@ -16820,6 +16820,13 @@ Set-NetAdapterAdvancedProperty -Name "Ethernet" -RegistryKeyword "*JumboPacket" 
                     const disabledCost = (licenses.DisabledUserCost || 0);
                     const inactiveCost = (licenses.InactiveUserCost || 0);
                     
+                    // Calculate comprehensive savings
+                    const licDetails = (IDLMData.stats?.Licenses?.Details || []);
+                    const paidUnused = licDetails.filter(l => l.UnitPrice > 0 && l.Total < 1000).reduce((s, l) => s + Math.max(0, (l.Total - l.Consumed) * l.UnitPrice), 0);
+                    const comprehensiveSavings = Math.max(totalSavings, paidUnused + inactiveCost + disabledCost);
+                    const disabledCost = (licenses.DisabledUserCost || 0);
+                    const inactiveCost = (licenses.InactiveUserCost || 0);
+                    
                     // Sample tasks data
                     const tasks = [
                         { id: 1, title: 'Enable MFA for all users', category: 'Security', priority: 'high', status: 'pending', created: '2025-01-08', due: '2025-01-31' },
@@ -16899,8 +16906,13 @@ Set-NetAdapterAdvancedProperty -Name "Ethernet" -RegistryKeyword "*JumboPacket" 
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
                                     <div>
                                         <h3 style="color:white;margin:0 0 8px;">💰 Total Potential Savings</h3>
-                                        <div style="font-size:3rem;font-weight:700;">${totalSavings.toLocaleString()} NOK</div>
-                                        <div style="opacity:0.9;">per month (${(totalSavings * 12).toLocaleString()} NOK/year)</div>
+                                        <div style="font-size:3rem;font-weight:700;">${comprehensiveSavings.toLocaleString()} NOK</div>
+                                        <div style="opacity:0.9;">per month (${(comprehensiveSavings * 12).toLocaleString()} NOK/year)</div>
+                                        <div style="margin-top:12px;opacity:0.85;font-size:0.875rem;">
+                                            Inactive user licenses: ${inactiveCost.toLocaleString()} kr | 
+                                            Disabled user licenses: ${disabledCost.toLocaleString()} kr | 
+                                            Unused paid seats: ${paidUnused.toLocaleString()} kr
+                                        </div>
                                     </div>
                                     <div style="font-size:4rem;opacity:0.3;">💵</div>
                                 </div>
@@ -17005,10 +17017,18 @@ Set-NetAdapterAdvancedProperty -Name "Ethernet" -RegistryKeyword "*JumboPacket" 
                     container.innerHTML = `
                         <section class="page-section">
                             <!-- Section Tabs -->
-                            <div class="section-tabs" style="display:flex;gap:8px;margin-bottom:24px;background:white;padding:12px;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                            <div class="section-tabs" style="display:flex;gap:8px;margin-bottom:24px;background:white;padding:12px;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1);flex-wrap:wrap;">
                                 <button class="section-tab active" data-section="diagrams" style="display:flex;align-items:center;gap:8px;padding:12px 24px;background:#f1f5f9;border:2px solid transparent;border-radius:8px;cursor:pointer;font-weight:600;" onclick="IDLMController.switchDocsSection('diagrams', this)">
                                     <span class="tab-icon">📊</span>
                                     <span class="tab-text">Architecture Diagrams</span>
+                                </button>
+                                <button class="section-tab" data-section="credentials" style="display:flex;align-items:center;gap:8px;padding:12px 24px;background:#f8fafc;border:2px solid transparent;border-radius:8px;cursor:pointer;font-weight:600;color:#64748b;" onclick="IDLMController.switchDocsSection('credentials', this)">
+                                    <span class="tab-icon">&#x1F510;</span>
+                                    <span class="tab-text">Credential Security</span>
+                                </button>
+                                <button class="section-tab" data-section="identity" style="display:flex;align-items:center;gap:8px;padding:12px 24px;background:#f8fafc;border:2px solid transparent;border-radius:8px;cursor:pointer;font-weight:600;color:#64748b;" onclick="IDLMController.switchDocsSection('identity', this)">
+                                    <span class="tab-icon">&#x1F464;</span>
+                                    <span class="tab-text">Identity &amp; Licenses</span>
                                 </button>
                                 <button class="section-tab" data-section="deployment" style="display:flex;align-items:center;gap:8px;padding:12px 24px;background:#f8fafc;border:2px solid transparent;border-radius:8px;cursor:pointer;font-weight:600;color:#64748b;" onclick="IDLMController.switchDocsSection('deployment', this)">
                                     <span class="tab-icon">🚀</span>
@@ -17038,6 +17058,9 @@ Set-NetAdapterAdvancedProperty -Name "Ethernet" -RegistryKeyword "*JumboPacket" 
                                     <button class="diagram-btn" onclick="IDLMController.loadDiagram('rbac', this)" style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:#f1f5f9;border:none;border-radius:8px;cursor:pointer;font-weight:500;">
                                         <span>🔐</span><span>RBAC</span>
                                     </button>
+                                    <button class="diagram-btn" onclick="IDLMController.loadDiagram('credflow', this)" style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:#f1f5f9;border:none;border-radius:8px;cursor:pointer;font-weight:500;">
+                                        <span>&#x1F511;</span><span>Credential Flow</span>
+                                    </button>
                                 </div>
 
                                 <div class="diagram-info" style="background:white;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
@@ -17046,7 +17069,7 @@ Set-NetAdapterAdvancedProperty -Name "Ethernet" -RegistryKeyword "*JumboPacket" 
                                 </div>
 
                                 <div class="diagram-viewer" style="background:white;border-radius:12px;padding:20px;min-height:400px;box-shadow:0 1px 3px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;">
-                                    <div id="idlm-diagram-content" style="text-align:center;color:#64748b;">
+                                    <div id="idlm-diagram-content">
                                         <div style="font-size:4rem;margin-bottom:16px;">📊</div>
                                         <p>Architecture diagram would be displayed here</p>
                                         <p style="font-size:0.875rem;">Select a diagram type above to view</p>
@@ -17063,7 +17086,270 @@ Set-NetAdapterAdvancedProperty -Name "Ethernet" -RegistryKeyword "*JumboPacket" 
                             </div>
 
                             <!-- Deployment Section -->
-                            <div id="idlm-deployment-section" class="section-content" style="display:none;">
+                            
+                            <!-- Credential Security Section -->
+                            <div id="idlm-credentials-section" class="section-content" style="display:none;">
+                                <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.1);margin-bottom:20px;">
+                                    <h3 style="margin:0 0 20px;">&#x1F510; Credential Security Architecture</h3>
+                                    <p style="color:#64748b;margin:0 0 20px;">All credentials in the InfraPortal system are handled using Windows DPAPI encryption. No plaintext passwords are stored anywhere.</p>
+
+                                    <!-- Security Model Overview -->
+                                    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:24px;">
+                                        <div style="padding:20px;background:rgba(34,197,94,0.08);border-radius:10px;border-left:4px solid #22c55e;">
+                                            <h4 style="margin:0 0 8px;color:#166534;">&#x1F512; DPAPI Encryption</h4>
+                                            <p style="margin:0;color:#64748b;font-size:13px;">Credentials are encrypted using Windows Data Protection API via <code>Export-Clixml</code>. The encryption key is derived from the Windows user profile + machine key. Credentials can ONLY be decrypted by the same user on the same machine.</p>
+                                        </div>
+                                        <div style="padding:20px;background:rgba(59,130,246,0.08);border-radius:10px;border-left:4px solid #3b82f6;">
+                                            <h4 style="margin:0 0 8px;color:#1e40af;">&#x1F6E1; Access Control</h4>
+                                            <p style="margin:0;color:#64748b;font-size:13px;">Only accounts matching configured admin patterns can access credential management. Enforced in both PowerShell (server-side) and JavaScript (client-side).</p>
+                                        </div>
+                                        <div style="padding:20px;background:rgba(168,85,247,0.08);border-radius:10px;border-left:4px solid #a855f7;">
+                                            <h4 style="margin:0 0 8px;color:#7c3aed;">&#x1F4C2; Secure Storage</h4>
+                                            <p style="margin:0;color:#64748b;font-size:13px;">Credential files stored in dedicated config directories. These paths are NOT in version control and are excluded from Git entirely.</p>
+                                        </div>
+                                        <div style="padding:20px;background:rgba(249,115,22,0.08);border-radius:10px;border-left:4px solid #f97316;">
+                                            <h4 style="margin:0 0 8px;color:#c2410c;">&#x1F4DD; Audit Trail</h4>
+                                            <p style="margin:0;color:#64748b;font-size:13px;">All credential add/remove/test operations are logged. Deployments are logged with unique IDs. Credential index maintained in JSON.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Credential Types -->
+                                    <h4 style="margin:0 0 12px;">&#x1F4CB; Credential Types Managed</h4>
+                                    <div style="overflow-x:auto;">
+                                        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                                            <thead>
+                                                <tr style="background:#f1f5f9;">
+                                                    <th style="padding:10px;text-align:left;border-bottom:2px solid #e2e8f0;">Credential</th>
+                                                    <th style="padding:10px;text-align:left;border-bottom:2px solid #e2e8f0;">Purpose</th>
+                                                    <th style="padding:10px;text-align:left;border-bottom:2px solid #e2e8f0;">Encryption</th>
+                                                    <th style="padding:10px;text-align:left;border-bottom:2px solid #e2e8f0;">Used By</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="border-bottom:1px solid #e2e8f0;">
+                                                    <td style="padding:10px;"><strong>Domain Join</strong></td>
+                                                    <td style="padding:10px;color:#64748b;">Service account for joining new VMs to Active Directory</td>
+                                                    <td style="padding:10px;"><span class="badge badge-success" style="font-size:11px;">DPAPI</span></td>
+                                                    <td style="padding:10px;color:#64748b;">VM Deployment</td>
+                                                </tr>
+                                                <tr style="border-bottom:1px solid #e2e8f0;">
+                                                    <td style="padding:10px;"><strong>Hypervisor Admin</strong></td>
+                                                    <td style="padding:10px;color:#64748b;">API credentials for hypervisor management and VM creation</td>
+                                                    <td style="padding:10px;"><span class="badge badge-success" style="font-size:11px;">DPAPI</span></td>
+                                                    <td style="padding:10px;color:#64748b;">VM Deployment</td>
+                                                </tr>
+                                                <tr style="border-bottom:1px solid #e2e8f0;">
+                                                    <td style="padding:10px;"><strong>Server Upgrade</strong></td>
+                                                    <td style="padding:10px;color:#64748b;">Domain admin for DC/SQL promotion and migration tasks</td>
+                                                    <td style="padding:10px;"><span class="badge badge-success" style="font-size:11px;">DPAPI</span></td>
+                                                    <td style="padding:10px;color:#64748b;">Upgrade scripts</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding:10px;"><strong>Monitoring API</strong></td>
+                                                    <td style="padding:10px;color:#64748b;">Credentials for infrastructure monitoring and data collection</td>
+                                                    <td style="padding:10px;"><span class="badge badge-success" style="font-size:11px;">DPAPI</span></td>
+                                                    <td style="padding:10px;color:#64748b;">Monitoring scripts</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Credential Flow Steps -->
+                                <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.1);margin-bottom:20px;">
+                                    <h4 style="margin:0 0 16px;">&#x1F680; Credential Flow</h4>
+                                    <div style="display:flex;flex-direction:column;gap:12px;">
+                                        <div style="display:flex;gap:16px;padding:14px;background:#f8fafc;border-radius:8px;align-items:flex-start;">
+                                            <div style="min-width:32px;height:32px;background:#3b82f6;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">1</div>
+                                            <div>
+                                                <strong>User Authentication</strong>
+                                                <p style="margin:4px 0 0;color:#64748b;font-size:13px;">Browser sends authentication request. Server returns authenticated username. JavaScript checks against admin pattern.</p>
+                                            </div>
+                                        </div>
+                                        <div style="display:flex;gap:16px;padding:14px;background:#f8fafc;border-radius:8px;align-items:flex-start;">
+                                            <div style="min-width:32px;height:32px;background:#3b82f6;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">2</div>
+                                            <div>
+                                                <strong>Credential Validation</strong>
+                                                <p style="margin:4px 0 0;color:#64748b;font-size:13px;">Portal calls credential validation API. Checks if encrypted credential files exist at DPAPI-encrypted paths.</p>
+                                            </div>
+                                        </div>
+                                        <div style="display:flex;gap:16px;padding:14px;background:#f8fafc;border-radius:8px;align-items:flex-start;">
+                                            <div style="min-width:32px;height:32px;background:#3b82f6;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">3</div>
+                                            <div>
+                                                <strong>Template Selection &amp; Deploy</strong>
+                                                <p style="margin:4px 0 0;color:#64748b;font-size:13px;">User selects template. PowerShell loads DPAPI credentials with <code>Import-Clixml</code>. Creates VM via REST API. Joins to AD domain.</p>
+                                            </div>
+                                        </div>
+                                        <div style="display:flex;gap:16px;padding:14px;background:#f8fafc;border-radius:8px;align-items:flex-start;">
+                                            <div style="min-width:32px;height:32px;background:#22c55e;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">4</div>
+                                            <div>
+                                                <strong>Audit &amp; Logging</strong>
+                                                <p style="margin:4px 0 0;color:#64748b;font-size:13px;">Deployment ID generated (GUID). All steps logged. Status returned to portal UI.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Credential Management Commands -->
+                                <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                                    <h4 style="margin:0 0 16px;">&#x2699; Credential Management Commands</h4>
+                                    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:12px;">
+                                        <div style="padding:14px;background:#f0fdf4;border-radius:8px;border-left:3px solid #22c55e;">
+                                            <strong style="color:#166534;">List all credentials</strong>
+                                            <pre style="margin:8px 0 0;padding:8px;background:#f8fafc;border-radius:4px;font-size:12px;overflow-x:auto;"><code>.\Infrastructure\Manage-SecureCredentials.ps1 -Action List</code></pre>
+                                        </div>
+                                        <div style="padding:14px;background:#eff6ff;border-radius:8px;border-left:3px solid #3b82f6;">
+                                            <strong style="color:#1e40af;">Add new credential</strong>
+                                            <pre style="margin:8px 0 0;padding:8px;background:#f8fafc;border-radius:4px;font-size:12px;overflow-x:auto;"><code>.\Infrastructure\Manage-SecureCredentials.ps1 -Action Add -Name "servername"</code></pre>
+                                        </div>
+                                        <div style="padding:14px;background:#fefce8;border-radius:8px;border-left:3px solid #eab308;">
+                                            <strong style="color:#a16207;">Test credential</strong>
+                                            <pre style="margin:8px 0 0;padding:8px;background:#f8fafc;border-radius:4px;font-size:12px;overflow-x:auto;"><code>.\Infrastructure\Manage-SecureCredentials.ps1 -Action Test -Name "domain-join"</code></pre>
+                                        </div>
+                                        <div style="padding:14px;background:#fef2f2;border-radius:8px;border-left:3px solid #ef4444;">
+                                            <strong style="color:#dc2626;">Remove credential</strong>
+                                            <pre style="margin:8px 0 0;padding:8px;background:#f8fafc;border-radius:4px;font-size:12px;overflow-x:auto;"><code>.\Infrastructure\Manage-SecureCredentials.ps1 -Action Remove -Name "old-cred"</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Identity & Licenses Section -->
+                            <div id="idlm-identity-section" class="section-content" style="display:none;">
+                                <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.1);margin-bottom:20px;">
+                                    <h3 style="margin:0 0 8px;">&#x1F464; Identity &amp; License Management (IDLM)</h3>
+                                    <p style="color:#64748b;margin:0 0 20px;">The IDLM module provides Microsoft 365 identity governance and license cost optimization for <strong>${org.DisplayName || 'Your Organization'}</strong> (${org.Domain || 'yourdomain.com'}).</p>
+
+                                    <!-- Tenant Overview -->
+                                    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:12px;margin-bottom:24px;">
+                                        <div style="text-align:center;padding:16px;background:rgba(59,130,246,0.08);border-radius:10px;">
+                                            <div style="font-size:24px;font-weight:700;color:#1e40af;">${users.TotalUsers || 0}</div>
+                                            <div style="color:#64748b;font-size:12px;">Total Users</div>
+                                        </div>
+                                        <div style="text-align:center;padding:16px;background:rgba(34,197,94,0.08);border-radius:10px;">
+                                            <div style="font-size:24px;font-weight:700;color:#166534;">${users.Members || 0}</div>
+                                            <div style="color:#64748b;font-size:12px;">Members</div>
+                                        </div>
+                                        <div style="text-align:center;padding:16px;background:rgba(249,115,22,0.08);border-radius:10px;">
+                                            <div style="font-size:24px;font-weight:700;color:#c2410c;">${users.Guests || 0}</div>
+                                            <div style="color:#64748b;font-size:12px;">Guests</div>
+                                        </div>
+                                        <div style="text-align:center;padding:16px;background:rgba(168,85,247,0.08);border-radius:10px;">
+                                            <div style="font-size:24px;font-weight:700;color:#7c3aed;">${licenses.TotalCost ? licenses.TotalCost.toLocaleString('nb-NO') : '0'} kr</div>
+                                            <div style="color:#64748b;font-size:12px;">Monthly Cost</div>
+                                        </div>
+                                        <div style="text-align:center;padding:16px;background:rgba(239,68,68,0.08);border-radius:10px;">
+                                            <div style="font-size:24px;font-weight:700;color:#dc2626;">${security.MfaPercentage || 0}%</div>
+                                            <div style="color:#64748b;font-size:12px;">MFA Coverage</div>
+                                        </div>
+                                        <div style="text-align:center;padding:16px;background:rgba(234,179,8,0.08);border-radius:10px;">
+                                            <div style="font-size:24px;font-weight:700;color:#a16207;">${security.GlobalAdmins || 0}</div>
+                                            <div style="color:#64748b;font-size:12px;">Global Admins</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- IDLM Architecture -->
+                                    <h4 style="margin:0 0 12px;">&#x1F3D7; IDLM Architecture</h4>
+                                    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:24px;">
+                                        <div style="padding:16px;background:#f8fafc;border-radius:8px;">
+                                            <h5 style="margin:0 0 8px;color:#1e40af;">&#x1F4E1; Data Source</h5>
+                                            <p style="margin:0;color:#64748b;font-size:13px;">Data collected via <strong>Microsoft Graph API</strong> (User.Read.All, Directory.Read.All, AuditLog.Read.All). Exported to cached JSON files in <code>/api/data/</code>:</p>
+                                            <ul style="margin:8px 0 0;padding-left:18px;color:#64748b;font-size:12px;line-height:1.8;">
+                                                <li><code>idlm-stats.json</code> â€” Aggregated statistics</li>
+                                                <li><code>idlm-users.json</code> â€” User directory</li>
+                                                <li><code>idlm-licenses.json</code> â€” License details</li>
+                                                <li><code>idlm-signins.json</code> â€” Sign-in activity</li>
+                                            </ul>
+                                        </div>
+                                        <div style="padding:16px;background:#f8fafc;border-radius:8px;">
+                                            <h5 style="margin:0 0 8px;color:#166534;">&#x2699; JavaScript Engine</h5>
+                                            <p style="margin:0;color:#64748b;font-size:13px;">The IDLMController renders 8 sub-pages dynamically from cached JSON:</p>
+                                            <ul style="margin:8px 0 0;padding-left:18px;color:#64748b;font-size:12px;line-height:1.8;">
+                                                <li><strong>Dashboard</strong> â€” User/license/security KPIs</li>
+                                                <li><strong>Users</strong> â€” Searchable user directory</li>
+                                                <li><strong>Licenses</strong> â€” Cost &amp; utilization analysis</li>
+                                                <li><strong>Security</strong> â€” MFA, admin roles, risk</li>
+                                                <li><strong>Reports</strong> â€” Exportable data reports</li>
+                                                <li><strong>Mitigation</strong> â€” Savings &amp; action items</li>
+                                            </ul>
+                                        </div>
+                                        <div style="padding:16px;background:#f8fafc;border-radius:8px;">
+                                            <h5 style="margin:0 0 8px;color:#7c3aed;">&#x1F4B0; Key Findings</h5>
+                                            <div style="display:flex;flex-direction:column;gap:8px;">
+                                                <div style="padding:8px;background:rgba(239,68,68,0.08);border-radius:6px;">
+                                                    <strong style="font-size:12px;color:#dc2626;">&#x26A0; MFA Gap</strong>
+                                                    <p style="margin:2px 0 0;font-size:12px;color:#64748b;">${security.MfaNotRegistered || 0} users without MFA (${(100 - (security.MfaPercentage || 0)).toFixed(1)}%)</p>
+                                                </div>
+                                                <div style="padding:8px;background:rgba(249,115,22,0.08);border-radius:6px;">
+                                                    <strong style="font-size:12px;color:#c2410c;">&#x1F4B8; License waste</strong>
+                                                    <p style="margin:2px 0 0;font-size:12px;color:#64748b;">${licenses.InactiveLicensed || 0} inactive licensed users (${licenses.PotentialSavings || 0} kr/mo)</p>
+                                                </div>
+                                                <div style="padding:8px;background:rgba(168,85,247,0.08);border-radius:6px;">
+                                                    <strong style="font-size:12px;color:#7c3aed;">&#x1F451; Admin Sprawl</strong>
+                                                    <p style="margin:2px 0 0;font-size:12px;color:#64748b;">${security.GlobalAdmins || 0} Global Admins (recommend 2-4), ${security.PrivilegedRoles || 0} privileged role assignments</p>
+                                                </div>
+                                                <div style="padding:8px;background:rgba(234,179,8,0.08);border-radius:6px;">
+                                                    <strong style="font-size:12px;color:#a16207;">&#x1F4CA; Annual Savings</strong>
+                                                    <p style="margin:2px 0 0;font-size:12px;color:#64748b;">${((licenses.PotentialSavings || 0) * 12).toLocaleString('nb-NO')} kr/year from license optimization alone</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tenant Info table -->
+                                    <h4 style="margin:0 0 12px;">&#x1F3E2; Tenant Details</h4>
+                                    <div style="overflow-x:auto;">
+                                        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                                            <tbody>
+                                                <tr style="border-bottom:1px solid #e2e8f0;">
+                                                    <td style="padding:10px;font-weight:600;width:200px;">Organization</td>
+                                                    <td style="padding:10px;color:#64748b;">${org.DisplayName || 'Your Organization'}</td>
+                                                </tr>
+                                                <tr style="border-bottom:1px solid #e2e8f0;">
+                                                    <td style="padding:10px;font-weight:600;">Domain</td>
+                                                    <td style="padding:10px;color:#64748b;">${org.Domain || 'yourdomain.com'}</td>
+                                                </tr>
+                                                <tr style="border-bottom:1px solid #e2e8f0;">
+                                                    <td style="padding:10px;font-weight:600;">Tenant ID</td>
+                                                    <td style="padding:10px;color:#64748b;"><code>${org.TenantId || 'N/A'}</code></td>
+                                                </tr>
+                                                <tr style="border-bottom:1px solid #e2e8f0;">
+                                                    <td style="padding:10px;font-weight:600;">Hybrid Identity</td>
+                                                    <td style="padding:10px;color:#64748b;">Microsoft Entra Connect syncs on-prem AD accounts to Entra ID</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding:10px;font-weight:600;">Data Source</td>
+                                                    <td style="padding:10px;color:#64748b;">Microsoft Graph API with cached JSON files</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Priority Actions -->
+                                <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                                    <h4 style="margin:0 0 16px;">&#x1F3AF; Priority Actions</h4>
+                                    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:12px;">
+                                        <div style="padding:14px;background:rgba(239,68,68,0.06);border-radius:8px;border-left:3px solid #ef4444;">
+                                            <strong style="color:#dc2626;">&#x1F534; Critical: MFA Enrollment</strong>
+                                            <p style="margin:6px 0 0;color:#64748b;font-size:13px;">Enable MFA for remaining ${security.MfaNotRegistered || 0} users. Current coverage: ${security.MfaPercentage || 0}%. Target: 100% for all members.</p>
+                                        </div>
+                                        <div style="padding:14px;background:rgba(249,115,22,0.06);border-radius:8px;border-left:3px solid #f97316;">
+                                            <strong style="color:#c2410c;">&#x1F7E0; High: Reduce Global Admins</strong>
+                                            <p style="margin:6px 0 0;color:#64748b;font-size:13px;">Reduce from ${security.GlobalAdmins || 0} to 2-4 accounts. Use dedicated admin roles (Security Admin, User Admin) instead.</p>
+                                        </div>
+                                        <div style="padding:14px;background:rgba(234,179,8,0.06);border-radius:8px;border-left:3px solid #eab308;">
+                                            <strong style="color:#a16207;">&#x1F7E1; Medium: License Cleanup</strong>
+                                            <p style="margin:6px 0 0;color:#64748b;font-size:13px;">Remove licenses from ${licenses.InactiveLicensed || 0} inactive users and ${users.Disabled || 0} disabled accounts. Potential saving: ${licenses.PotentialSavings || 0} kr/mo.</p>
+                                        </div>
+                                        <div style="padding:14px;background:rgba(59,130,246,0.06);border-radius:8px;border-left:3px solid #3b82f6;">
+                                            <strong style="color:#1e40af;">&#x1F535; Low: Guest Audit</strong>
+                                            <p style="margin:6px 0 0;color:#64748b;font-size:13px;">Review ${users.Guests || 0} guest accounts. Verify each has a valid business reason and remove stale external collaborators.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<div id="idlm-deployment-section" class="section-content" style="display:none;">
                                 <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
                                     <h3 style="margin:0 0 20px;">🚀 Deployment Guide</h3>
                                     
@@ -17150,6 +17436,8 @@ Set-NetAdapterAdvancedProperty -Name "Ethernet" -RegistryKeyword "*JumboPacket" 
                     
                     // Show/hide sections
                     document.getElementById('idlm-diagrams-section').style.display = section === 'diagrams' ? 'flex' : 'none';
+                    document.getElementById('idlm-credentials-section').style.display = section === 'credentials' ? 'block' : 'none';
+                    document.getElementById('idlm-identity-section').style.display = section === 'identity' ? 'block' : 'none';
                     document.getElementById('idlm-deployment-section').style.display = section === 'deployment' ? 'block' : 'none';
                     document.getElementById('idlm-scripts-section').style.display = section === 'scripts' ? 'block' : 'none';
                 },
@@ -17171,11 +17459,82 @@ Set-NetAdapterAdvancedProperty -Name "Ethernet" -RegistryKeyword "*JumboPacket" 
                         dataflow: { title: 'Data Flow', desc: 'How data flows from Microsoft Graph API to the portal dashboard' },
                         webapp: { title: 'Web Application Architecture', desc: 'Frontend SPA structure, JavaScript modules, and authentication flow' },
                         cicd: { title: 'CI/CD Pipeline', desc: 'GitHub Actions workflow with Azure OIDC federation for secure deployments' },
-                        rbac: { title: 'RBAC Architecture', desc: 'Role-Based Access Control with tenant restriction - Admin, Operator, and Viewer roles' }
+                        rbac: { title: 'RBAC Architecture', desc: 'Role-Based Access Control with tenant restriction - Admin, Operator, and Viewer roles' },
+                        credflow: {
+                            title: 'Credential Security Flow',
+                            desc: 'How credentials are stored, encrypted, validated, and used across the portal - DPAPI model with access control',
+                            svg: `<svg viewBox="0 0 1200 700" style="width:100%;max-width:1200px;height:auto;font-family:'Segoe UI',sans-serif;">
+                                <defs>
+                                    <marker id="cfA" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="#3b82f6"/></marker>
+                                    <marker id="cfAG" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="#22c55e"/></marker>
+                                    <marker id="cfAR" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="#ef4444"/></marker>
+                                    <marker id="cfAO" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto"><polygon points="0,0 10,5 0,10" fill="#f97316"/></marker>
+                                </defs>
+                                <text x="600" y="28" text-anchor="middle" fill="#1e40af" font-size="16" font-weight="700">CREDENTIAL SECURITY FLOW</text>
+                                <text x="600" y="48" text-anchor="middle" fill="#64748b" font-size="10">DPAPI Encryption &#x2022; User/Machine Bound &#x2022; Access Control &#x2022; Audit Logging</text>
+                                <rect x="50" y="80" width="220" height="80" rx="12" fill="rgba(34,197,94,0.12)" stroke="#22c55e" stroke-width="2"/>
+                                <text x="160" y="108" text-anchor="middle" fill="#166534" font-size="13" font-weight="bold">IT Admin</text>
+                                <text x="160" y="128" text-anchor="middle" fill="#15803d" font-size="10">Authorized admin account</text>
+                                <text x="160" y="148" text-anchor="middle" fill="#22c55e" font-size="9">Kerberos SSO via IIS</text>
+                                <line x1="270" y1="120" x2="340" y2="120" stroke="#22c55e" stroke-width="2" marker-end="url(#cfAG)"/>
+                                <text x="305" y="112" text-anchor="middle" fill="#22c55e" font-size="8" font-weight="bold">HTTPS</text>
+                                <rect x="340" y="85" width="200" height="70" rx="10" fill="rgba(59,130,246,0.12)" stroke="#3b82f6" stroke-width="2"/>
+                                <text x="440" y="110" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="bold">Authentication</text>
+                                <text x="440" y="130" text-anchor="middle" fill="#2563eb" font-size="9">Windows Auth / IIS</text>
+                                <text x="440" y="145" text-anchor="middle" fill="#3b82f6" font-size="9">Returns: username, domain</text>
+                                <line x1="540" y1="120" x2="620" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#cfA)"/>
+                                <text x="580" y="112" text-anchor="middle" fill="#3b82f6" font-size="8" font-weight="bold">JSON</text>
+                                <rect x="620" y="80" width="260" height="80" rx="10" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-width="2"/>
+                                <text x="750" y="108" text-anchor="middle" fill="#7c3aed" font-size="12" font-weight="bold">JavaScript Access Check</text>
+                                <text x="750" y="128" text-anchor="middle" fill="#6d28d9" font-size="9">checkDeploymentAccess()</text>
+                                <text x="750" y="148" text-anchor="middle" fill="#a855f7" font-size="9">Admin pattern matching</text>
+                                <rect x="940" y="85" width="180" height="70" rx="10" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="2"/>
+                                <text x="1030" y="115" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="bold">Access Denied</text>
+                                <text x="1030" y="135" text-anchor="middle" fill="#ef4444" font-size="9">Non-admin users blocked</text>
+                                <line x1="880" y1="115" x2="938" y2="115" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#cfAR)"/>
+                                <text x="909" y="107" text-anchor="middle" fill="#ef4444" font-size="7">DENIED</text>
+                                <line x1="750" y1="160" x2="750" y2="210" stroke="#a855f7" stroke-width="2" marker-end="url(#cfA)"/>
+                                <text x="770" y="188" fill="#a855f7" font-size="8" font-weight="bold">ALLOWED</text>
+                                <rect x="100" y="215" width="1000" height="100" rx="14" fill="rgba(249,115,22,0.06)" stroke="#f97316" stroke-width="1.5"/>
+                                <text x="600" y="240" text-anchor="middle" fill="#c2410c" font-size="13" font-weight="bold">POWERSHELL API LAYER</text>
+                                <rect x="120" y="260" width="180" height="40" rx="8" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1.5"/>
+                                <text x="210" y="285" text-anchor="middle" fill="#166534" font-size="10" font-weight="bold">ValidateCredentials</text>
+                                <rect x="320" y="260" width="180" height="40" rx="8" fill="rgba(59,130,246,0.15)" stroke="#3b82f6" stroke-width="1.5"/>
+                                <text x="410" y="285" text-anchor="middle" fill="#1e40af" font-size="10" font-weight="bold">Deploy VM</text>
+                                <rect x="520" y="260" width="180" height="40" rx="8" fill="rgba(168,85,247,0.15)" stroke="#a855f7" stroke-width="1.5"/>
+                                <text x="610" y="285" text-anchor="middle" fill="#7c3aed" font-size="10" font-weight="bold">Add Credential</text>
+                                <rect x="720" y="260" width="180" height="40" rx="8" fill="rgba(234,179,8,0.15)" stroke="#eab308" stroke-width="1.5"/>
+                                <text x="810" y="285" text-anchor="middle" fill="#a16207" font-size="10" font-weight="bold">Test Credential</text>
+                                <rect x="920" y="260" width="160" height="40" rx="8" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="1.5"/>
+                                <text x="1000" y="285" text-anchor="middle" fill="#dc2626" font-size="10" font-weight="bold">Access Check</text>
+                                <line x1="600" y1="315" x2="600" y2="360" stroke="#f97316" stroke-width="3" marker-end="url(#cfAO)"/>
+                                <text x="625" y="342" fill="#f97316" font-size="9" font-weight="bold">DPAPI</text>
+                                <rect x="200" y="365" width="800" height="80" rx="14" fill="rgba(34,197,94,0.08)" stroke="#22c55e" stroke-width="2"/>
+                                <text x="600" y="390" text-anchor="middle" fill="#166534" font-size="13" font-weight="bold">WINDOWS DPAPI ENCRYPTION LAYER</text>
+                                <text x="600" y="410" text-anchor="middle" fill="#15803d" font-size="10">Export-Clixml / Import-Clixml</text>
+                                <text x="600" y="430" text-anchor="middle" fill="#22c55e" font-size="9">Encryption key: Windows User Profile (SID) + Machine DPAPI Master Key</text>
+                                <line x1="600" y1="445" x2="600" y2="490" stroke="#22c55e" stroke-width="3" marker-end="url(#cfAG)"/>
+                                <rect x="100" y="495" width="450" height="80" rx="12" fill="rgba(59,130,246,0.08)" stroke="#3b82f6" stroke-width="2"/>
+                                <text x="325" y="520" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="bold">Credential Storage (Encrypted .cred/.xml)</text>
+                                <text x="325" y="540" text-anchor="middle" fill="#2563eb" font-size="9">DPAPI-encrypted credential files</text>
+                                <text x="325" y="556" text-anchor="middle" fill="#64748b" font-size="8">NOT in Git - NTFS ACL restricted - Binary encrypted blobs</text>
+                                <rect x="620" y="495" width="450" height="80" rx="12" fill="rgba(249,115,22,0.08)" stroke="#f97316" stroke-width="2"/>
+                                <text x="845" y="520" text-anchor="middle" fill="#c2410c" font-size="12" font-weight="bold">Credential Index + Audit Log</text>
+                                <text x="845" y="540" text-anchor="middle" fill="#ea580c" font-size="9">credential-index.json + deployment logs</text>
+                                <text x="845" y="556" text-anchor="middle" fill="#64748b" font-size="8">Tracks all credential operations</text>
+                                <rect x="100" y="600" width="1000" height="40" rx="8" fill="rgba(30,41,59,0.92)"/>
+                                <text x="600" y="625" text-anchor="middle" fill="#f1f5f9" font-size="11" font-weight="600">Auth &#x2192; Access Gate &#x2192; PS1 Access Check &#x2192; DPAPI Import-Clixml &#x2192; Encrypted .cred files &#x2192; API calls</text>
+                            </svg>`
+                        }
                     };
                     
-                    document.getElementById('idlm-diagram-title').textContent = diagrams[type].title;
-                    document.getElementById('idlm-diagram-desc').textContent = diagrams[type].desc;
+                    const d = diagrams[type];
+                    if (!d) return;
+                    document.getElementById('idlm-diagram-title').textContent = d.title;
+                    document.getElementById('idlm-diagram-desc').textContent = d.desc;
+                    if (d.svg) {
+                        document.getElementById('idlm-diagram-content').innerHTML = d.svg;
+                    }
                     
                     const contentEl = document.getElementById('idlm-diagram-content');
                     contentEl.style.textAlign = 'left';
