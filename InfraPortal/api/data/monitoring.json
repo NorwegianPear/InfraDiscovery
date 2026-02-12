@@ -1,0 +1,181 @@
+{
+  "summary": {
+    "total": 15,
+    "online": 13,
+    "offline": 2,
+    "legacy": 0,
+    "domainControllers": 2,
+    "hyperVHosts": 2,
+    "lastScan": "2026-02-07T18:00:00"
+  },
+  "servers": [
+    {
+      "name": "DALIR-DC04",
+      "ip": "172.24.130.42",
+      "os": "Windows Server 2022 Standard",
+      "roles": ["Domain Controller", "PDC", "FSMO", "GC"],
+      "status": "online",
+      "metrics": { "cpu": 12, "memory": 45, "disk": 38 }
+    },
+    {
+      "name": "DALIR-DC03",
+      "ip": "10.25.80.12",
+      "os": "Windows Server 2022 Standard",
+      "roles": ["Domain Controller", "GC"],
+      "status": "online",
+      "metrics": { "cpu": 8, "memory": 32, "disk": 35 }
+    },
+    {
+      "name": "DALIR-SRV01",
+      "ip": "10.25.80.102",
+      "os": "Windows Server 2022 Standard",
+      "roles": ["File Services", "DFS", "Management"],
+      "status": "online",
+      "metrics": { "cpu": 15, "memory": 52, "disk": 48 }
+    },
+    {
+      "name": "DALIR-SQL01",
+      "ip": "10.25.80.13",
+      "os": "Windows Server 2022 Datacenter",
+      "roles": ["SQL Server"],
+      "status": "online",
+      "metrics": { "cpu": 22, "memory": 68, "disk": 55 }
+    },
+    {
+      "name": "DALIR-SQL02",
+      "ip": "10.25.80.20",
+      "os": "Windows Server 2022 Standard",
+      "roles": ["SQL Server 2022 Standard", "SSMS 20.x"],
+      "status": "online",
+      "locale": "nb-NO",
+      "encryption": "ForceEncryption=Disabled",
+      "metrics": { "cpu": 5, "memory": 28, "disk": 12 }
+    },
+    {
+      "name": "DALIR-APP01",
+      "ip": "10.25.80.14",
+      "os": "Windows Server 2022 Standard",
+      "roles": ["IIS", "Web Server", "File Services"],
+      "status": "online",
+      "metrics": { "cpu": 18, "memory": 55, "disk": 42 }
+    },
+    {
+      "name": "DALIR-APP01OLD",
+      "ip": "10.25.80.114",
+      "os": "Windows Server 2022 Datacenter",
+      "roles": ["IIS", "Web Server"],
+      "status": "online",
+      "metrics": { "cpu": 3, "memory": 22, "disk": 65 },
+      "note": "Decommission Pending"
+    },
+    {
+      "name": "DALIR-APP02",
+      "ip": "10.25.80.15",
+      "os": "Windows Server 2022 Datacenter",
+      "roles": ["IIS", "Web Server", "File Services"],
+      "status": "online",
+      "metrics": { "cpu": 14, "memory": 48, "disk": 38 }
+    },
+    {
+      "name": "DALIR-APP03",
+      "ip": "10.25.80.18",
+      "os": "Windows Server 2022 Datacenter Evaluation",
+      "roles": [],
+      "status": "offline",
+      "metrics": { "cpu": 0, "memory": 0, "disk": 0 },
+      "note": "Unreachable"
+    },
+    {
+      "name": "DALIR-FIL01",
+      "ip": "10.25.80.16",
+      "os": "Windows Server 2022 Datacenter",
+      "roles": ["File Services"],
+      "status": "online",
+      "metrics": { "cpu": 8, "memory": 35, "disk": 72 }
+    },
+    {
+      "name": "DALIR-PRINT",
+      "ip": "10.25.80.103",
+      "os": "Windows Server 2022 Standard",
+      "roles": ["Print Services", "File Services"],
+      "status": "online",
+      "metrics": { "cpu": 6, "memory": 30, "disk": 25 }
+    },
+    {
+      "name": "DALIR-GLOBAL",
+      "ip": "10.25.80.101",
+      "os": "Windows Server 2022 Standard",
+      "roles": ["Global Services"],
+      "status": "online",
+      "metrics": { "cpu": 10, "memory": 40, "disk": 45 }
+    },
+    {
+      "name": "DALIR-MEATS",
+      "ip": "10.25.80.115",
+      "os": "Windows Server 2022 Standard",
+      "roles": ["MeatMaster Application"],
+      "status": "offline",
+      "metrics": { "cpu": 0, "memory": 0, "disk": 0 },
+      "note": "Unreachable"
+    },
+    {
+      "name": "DALIR-HYP01",
+      "ip": "10.25.89.31",
+      "os": "Windows Server 2022 Datacenter",
+      "roles": ["Hyper-V Host"],
+      "status": "online",
+      "metrics": { "cpu": 35, "memory": 72, "disk": 58 }
+    },
+    {
+      "name": "DALIR-HYP02",
+      "ip": "10.25.89.32",
+      "os": "Windows Server 2022 Standard",
+      "roles": ["Hyper-V Host"],
+      "status": "online",
+      "metrics": { "cpu": 28, "memory": 65, "disk": 52 }
+    }
+  ],
+  "alerts": [
+    {
+      "type": "warning",
+      "server": "DALIR-APP03",
+      "message": "Server unreachable - ping failed",
+      "timestamp": "2026-02-07T17:45:00"
+    },
+    {
+      "type": "warning",
+      "server": "DALIR-MEATS",
+      "message": "MeatMaster server unreachable",
+      "timestamp": "2026-02-07T17:45:00"
+    },
+    {
+      "type": "info",
+      "server": "DALIR-APP01OLD",
+      "message": "Server pending decommission",
+      "timestamp": "2026-02-07T12:00:00"
+    },
+    {
+      "type": "info",
+      "server": "DALIR-SQL02",
+      "message": "Post-deploy config: nb-NO locale, SSMS installed, encryption disabled",
+      "timestamp": "2026-02-07T19:30:00"
+    }
+  ],
+  "certificates": [
+    {
+      "subject": "*.dalir.no",
+      "issuer": "DALIR-CA",
+      "expires": "2027-01-15",
+      "daysRemaining": 342,
+      "status": "valid"
+    },
+    {
+      "subject": "DALIR-DC04.ad.dalir.no",
+      "issuer": "DALIR-CA",
+      "expires": "2026-12-30",
+      "daysRemaining": 326,
+      "status": "valid"
+    }
+  ],
+  "timestamp": "2026-02-07 18:30:00"
+}

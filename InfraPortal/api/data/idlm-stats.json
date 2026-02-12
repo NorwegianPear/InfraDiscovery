@@ -164,7 +164,7 @@
           "displayName": "Rana Administrator",
           "givenName": "Rana Administrator",
           "mobilePhone": "+4748854087",
-          "userPrincipalName": "radmin@jaeder.no"
+          "userPrincipalName": "radmin@dalir.no"
         }
       },
       {
@@ -181,7 +181,7 @@
           "mobilePhone": "+37127271736",
           "officeLocation": "ATEA - Riga",
           "surname": "Bilcane",
-          "userPrincipalName": "adm_a.bilcane@jaeder.no"
+          "userPrincipalName": "adm_a.bilcane@dalir.no"
         }
       },
       {
@@ -196,7 +196,7 @@
           "mobilePhone": "+371 26656700",
           "officeLocation": "Riga",
           "surname": "Vītoliņš",
-          "userPrincipalName": "adm_e.vitolins@jaeder.no"
+          "userPrincipalName": "adm_e.vitolins@dalir.no"
         }
       },
       {
@@ -209,7 +209,7 @@
           "givenName": "Mikus",
           "mobilePhone": "+371 26478574",
           "surname": "Krevics",
-          "userPrincipalName": "adm_m.krevics@jaeder.no"
+          "userPrincipalName": "adm_m.krevics@dalir.no"
         }
       },
       {
@@ -222,7 +222,7 @@
           "givenName": "Laura",
           "mobilePhone": "+371 20300225",
           "surname": "Dzalbe",
-          "userPrincipalName": "adm_l.dzalbe@jaeder.no"
+          "userPrincipalName": "adm_l.dzalbe@dalir.no"
         }
       },
       {
@@ -235,7 +235,7 @@
           "givenName": "Gatis",
           "mobilePhone": "+371 26156772",
           "surname": "Jankovskis",
-          "userPrincipalName": "adm_g.jankovskis@jaeder.no"
+          "userPrincipalName": "adm_g.jankovskis@dalir.no"
         }
       },
       {
@@ -248,7 +248,7 @@
           "givenName": "Irina",
           "mobilePhone": "+371 27086580",
           "surname": "Lapkovska",
-          "userPrincipalName": "adm_i.lapkovska@jaeder.no"
+          "userPrincipalName": "adm_i.lapkovska@dalir.no"
         }
       },
       {
@@ -261,7 +261,7 @@
           "givenName": "Nauris",
           "mobilePhone": "+37126120051",
           "surname": "Meznieks",
-          "userPrincipalName": "adm_n.meznieks@jaeder.no"
+          "userPrincipalName": "adm_n.meznieks@dalir.no"
         }
       },
       {
@@ -270,10 +270,10 @@
         "AdditionalProperties": {
           "@odata.type": "#microsoft.graph.user",
           "businessPhones": [],
-          "displayName": "ADMIN Tor Gabriel Espeland",
+          "displayName": "ADMIN Tor Gabriel Dalir",
           "givenName": "Tor Gabriel",
-          "surname": "Espeland",
-          "userPrincipalName": "adm_tg@jaeder.no"
+          "surname": "Dalir",
+          "userPrincipalName": "adm_tg@dalir.no"
         }
       },
       {
@@ -286,7 +286,7 @@
           "givenName": "Kristaps",
           "mobilePhone": "+371 20036668",
           "surname": "Valainis",
-          "userPrincipalName": "adm.kv@jaeder.no"
+          "userPrincipalName": "adm.kv@dalir.no"
         }
       }
     ],
@@ -322,9 +322,9 @@
     "PrivilegedRoles": 79
   },
   "Organization": {
-    "Domain": "jaeder.no",
+    "Domain": "dalir.no",
     "TenantId": "b0a70db4-583a-47b0-accd-da305691f609",
-    "DisplayName": "Jæder AS"
+    "DisplayName": "Dalir AS"
   },
   "SignIns": {
     "Locations": [
